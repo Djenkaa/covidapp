@@ -2,7 +2,7 @@
 
 
 @section('content')
-    @include('layouts.headers.guest')
+    @include('layouts.headers.guest',['text'=>'Izaberiti vasu drzavu da biste videli razltate'])
 
     <div class="container mt--8 pb-5">
         <div class="row justify-content-center">

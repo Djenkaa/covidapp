@@ -106,7 +106,15 @@ class HomeController extends Controller
     }
 
 
+    public function travel()
+    {
+        return view('travelAlert');
+    }
 
 
+    public function support()
+    {
+        return view('support');
+    }
 
 }

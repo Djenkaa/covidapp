@@ -92,7 +92,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}">
+                    <a class="nav-link" href="{{ route('travel') }}">
                         <i class="fas fa-plane-departure text-primary"></i> Travel Alert
                     </a>
                 </li>
@@ -151,7 +151,7 @@
 {{--            <!-- Navigation -->--}}
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">
-                    <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html">
+                    <a class="nav-link" href="{{route('support')}}">
                         <i class="fab fa-paypal"></i> Support
                     </a>
                 </li>
