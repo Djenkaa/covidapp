@@ -105,6 +105,7 @@
       <path value="$PROJECT_DIR$/vendor/chartisan/php" />
       <path value="$PROJECT_DIR$/vendor/consoletvs/charts" />
       <path value="$PROJECT_DIR$/vendor/coderello/laravel-shared-data" />
+      <path value="$PROJECT_DIR$/vendor/renatomarinho/laravel-page-speed" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
