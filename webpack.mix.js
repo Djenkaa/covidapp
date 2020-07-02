@@ -13,3 +13,27 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
+
+
+
+mix.styles([
+    'resources/css/argon.css',
+    'resources/css/nucleo.css',
+
+], 'public/css/all.css');
+
+
+mix.scripts([
+    'resources/js/myJS/jquery.min.js',
+    'resources/js/myJS/bootstrap.bundle.min.js',
+    'resources/js/myJS/numeral.js',
+    'resources/js/myJS/Chart.min.js',
+    'resources/js/myJS/Chart.extension.js',
+    'resources/js/myJS/argon.js'
+
+],'public/js/all.js');
+
+
+if (mix.inProduction()) {
+    mix.version();
+}

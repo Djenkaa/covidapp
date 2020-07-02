@@ -2,7 +2,20 @@
 
 
 @section('content')
-    @include('layouts.headers.guest',['text'=>'Izaberiti vasu drzavu da biste videli razltate'])
+
+    @php
+        $data = session()->get('countryShow');
+        $total = session()->get('total');
+    @endphp
+
+    @if($data)
+        @include('layouts.headers.guest',['text'=>$data['country']])
+
+    @else
+        @include('layouts.headers.guest',['text'=>'Select your country and get statistics about virus'])
+    @endif
+
+
 
     <div class="container mt--8 pb-5">
         <div class="row justify-content-center">
@@ -34,16 +47,9 @@
         </div>
     </div>
 
-    @if(request()->query('show'))
+    @if(request()->query('show') && $data)
 
-        @php
-            $data = session()->get('countryShow');
-            $total = session()->get('total');
-        @endphp
-
-
-
-        <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+        <div class="header bg-gradient-primary pb-5 pt-5 ">
             <div class="container-fluid">
                 <div class="header-body">
                     <!-- Card stats -->
@@ -63,8 +69,11 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @php
+                                    $percentageActive = (int)$data['activeCases'] / (int)$total['totalActiveCases'] * 100;
+                                    @endphp
                                     <p class="mt-3 mb-0 text-muted text-sm">
-                                        <span class="text-success mr-2"> 3.48%</span>
+                                        <span class="text-{{$percentageActive < 1 ? 'success' : 'danger'}} mr-2"> {{number_format($percentageActive,2)}}%</span>
                                         <span class="text-nowrap">of the total</span>
                                     </p>
                                 </div>
@@ -85,8 +94,11 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @php
+                                        $percentageConfirmed = (int)$data['dailyConfirmed'] / (int)$total['totalConfirmed'] * 100;
+                                    @endphp
                                     <p class="mt-3 mb-0 text-muted text-sm">
-                                        <span class="text-danger mr-2"> 3.48%</span>
+                                        <span class="text-{{$percentageConfirmed < 1 ? 'success' : 'danger'}} mr-2"> {{number_format($percentageConfirmed,2)}}%</span>
                                         <span class="text-nowrap">of the total</span>
                                     </p>
                                 </div>
@@ -107,8 +119,11 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @php
+                                        $percentageDeaths = (int)$data['dailyDeaths'] / (int)$total['totalDeaths'] * 100;
+                                    @endphp
                                     <p class="mt-3 mb-0 text-muted text-sm">
-                                        <span class="text-warning mr-2"> 1.10%</span>
+                                        <span class="text-{{$percentageDeaths < 1 ? 'success' : 'danger'}} mr-2"> {{number_format($percentageDeaths,2)}}%</span>
                                         <span class="text-nowrap">of the total</span>
                                     </p>
                                 </div>
@@ -226,6 +241,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
 
     @endif

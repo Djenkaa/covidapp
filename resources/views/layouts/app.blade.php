@@ -9,37 +9,45 @@
 
     <title>{{ config('app.name', 'Argon Dashboard') }}</title>
     <!-- Favicon -->
-    <link href="{{ asset('argon') }}/img/brand/favicon.png" rel="icon" type="image/png">
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <!-- Icons -->
-    <link href="{{ asset('argon') }}/vendor/nucleo/css/nucleo.css" rel="stylesheet">
-    <link href="{{ asset('argon') }}/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
-    <!-- Argon CSS -->
-    <link type="text/css" href="{{ asset('argon') }}/css/argon.css?v=1.0.0" rel="stylesheet">
+{{--    <link href="{{ asset('argon') }}/vendor/nucleo/css/nucleo.css" rel="stylesheet">--}}
+    <script src="https://kit.fontawesome.com/f5d5be0339.js" crossorigin="anonymous"></script>{{--    <!-- Argon CSS -->--}}
+{{--    <link type="text/css" href="{{ asset('argon') }}/css/argon.css?v=1.0.0" rel="stylesheet">--}}
+    <link rel="stylesheet" href="/css/all.css">
 </head>
 <body class="{{ $class ?? '' }}">
+
+
+
+
+
 
 @include('layouts.navbars.sidebar')
 
 
 <div class="main-content">
     @include('layouts.navbars.navbar')
-    @yield('content')
+
+        @yield('content')
+
 </div>
 
 
 @shared
-<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
-<script src="{{ asset('argon') }}/vendor/jquery/dist/jquery.min.js"></script>
-<script src="{{ asset('argon') }}/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
+{{--<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>--}}
+{{--<script src="{{ asset('argon') }}/vendor/jquery/dist/jquery.min.js"></script>--}}
+{{--<script src="{{ asset('argon') }}/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>--}}
+<script src="/js/all.js"></script>
 
 
 @stack('js')
 
 <!-- Argon JS -->
-<script src="{{ asset('argon') }}/js/argon.js?v=1.0.0"></script>
+{{--<script src="{{ asset('argon') }}/js/argon.js?v=1.0.0"></script>--}}
+
 </body>
 </html>
 

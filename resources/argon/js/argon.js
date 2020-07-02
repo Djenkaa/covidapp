@@ -1039,7 +1039,7 @@ var SalesChart = (function() {
 				},
                 title:{
 				    display:true,
-                    text:'Confirmed cases for last 24 hours'
+                    text:'Confirmed cases in the last 24 hours'
                 }
 			},
 			data: {

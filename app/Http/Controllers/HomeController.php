@@ -46,7 +46,6 @@ class HomeController extends Controller
                 array_unshift($dailyCases, $cases['daily_cases']);
             }
         }
-
         $top5 = Http::get('http://api.coronatracker.com/v3/stats/worldometer/country?limit=5');
         $top5Confirmed = [];
 
@@ -62,9 +61,7 @@ class HomeController extends Controller
                ]);
            }
         }
-
         share(['dailyCountry'=>$dailyCountry, 'dailyCases'=>$dailyCases]);
-
 
         return view('dashboard', compact('worldTotal', 'top5Confirmed'));
     }
