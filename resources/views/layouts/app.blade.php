@@ -49,14 +49,10 @@
 
 
 @shared
-
 <script src="/js/all.js"></script>
 
 
 @stack('js')
-
-
-
 </body>
 </html>
 

@@ -58,7 +58,7 @@
                 <div class="header-body">
                     <!-- Card stats -->
                     <div class="row">
-                        <div class="col-xl-4 col-lg-6">
+                        <div class="col-xl-3 col-lg-6">
                             <div class="card card-stats mb-4 mb-xl-0">
                                 <div class="card-body">
                                     <div class="row">
@@ -78,12 +78,12 @@
                                     @endphp
                                     <p class="mt-3 mb-0 text-muted text-sm">
                                         <span class="text-{{$percentageActive < 1 ? 'success' : 'danger'}} mr-2"> {{number_format($percentageActive,2)}}%</span>
-                                        <span class="text-nowrap">of the total</span>
+                                        <span class="text-nowrap">total of the world</span>
                                     </p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-lg-6">
+                        <div class="col-xl-3 col-lg-6">
                             <div class="card card-stats mb-4 mb-xl-0">
                                 <div class="card-body">
                                     <div class="row">
@@ -99,16 +99,16 @@
                                         </div>
                                     </div>
                                     @php
-                                        $percentageConfirmed = (int)$data['dailyConfirmed'] / (int)$total['totalConfirmed'] * 100;
+                                        $percentageConfirmed = (int)$data['dailyConfirmed'] / (int)$data['totalConfirmed'] * 100;
                                     @endphp
                                     <p class="mt-3 mb-0 text-muted text-sm">
                                         <span class="text-{{$percentageConfirmed < 1 ? 'success' : 'danger'}} mr-2"> {{number_format($percentageConfirmed,2)}}%</span>
-                                        <span class="text-nowrap">of the total</span>
+                                        <span class="text-nowrap">total of {{$data['country']}}</span>
                                     </p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-lg-6">
+                        <div class="col-xl-3 col-lg-6">
                             <div class="card card-stats mb-4 mb-xl-0">
                                 <div class="card-body">
                                     <div class="row">
@@ -124,11 +124,36 @@
                                         </div>
                                     </div>
                                     @php
-                                        $percentageDeaths = (int)$data['dailyDeaths'] / (int)$total['totalDeaths'] * 100;
+                                        $percentageDeaths = (int)$data['dailyDeaths'] / (int)$data['totalDeaths'] * 100;
                                     @endphp
                                     <p class="mt-3 mb-0 text-muted text-sm">
                                         <span class="text-{{$percentageDeaths < 1 ? 'success' : 'danger'}} mr-2"> {{number_format($percentageDeaths,2)}}%</span>
-                                        <span class="text-nowrap">of the total</span>
+                                        <span class="text-nowrap">total of {{$data['country']}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-6">
+                            <div class="card card-stats mb-4 mb-xl-0">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h5 class="card-title text-uppercase text-muted mb-0">Confirmed per million</h5>
+                                            <span
+                                                class="h2 font-weight-bold mb-0">{{number_format($data['totalConfirmedPerMillionPopulation'])}}</span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-primary text-white rounded-circle shadow">
+                                                <i class="fas fa-users"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @php
+                                        $percentageperMill = (int)$data['totalConfirmedPerMillionPopulation'] / (int)$data['totalConfirmed'] * 100;
+                                    @endphp
+                                    <p class="mt-3 mb-0 text-muted text-sm">
+                                        <span class="text-{{$percentageperMill < 1 ? 'success' : 'danger'}} mr-2"> {{number_format($percentageperMill,2)}}%</span>
+                                        <span class="text-nowrap">total of {{$data['country']}}</span>
                                     </p>
                                 </div>
                             </div>
