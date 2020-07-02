@@ -15,6 +15,9 @@
     <meta name="keywords" content="corona, virus, symptoms, statistics, analytics, people, die, percentage, coronavirus, covid, 19, confirmed, case, recovered, deaths, country, travel, alert, hospital, testing, tips">
     <meta name="description" content="We collect and process data around the clock, 24 hours a day, 7 days a week. Multiple updates per 10 minutes are performed on average by our team of analysts and researchers who validate the data from an ever-growing list of over 5,000 sources under the constant solicitation of users who alert us as soon as an official announcement is made anywhere around the world.">
 
+    <meta property="og:title" content="Covid-19" />
+    <meta property="og:description" content="Detailed statistics for the Covid-19 virus">
+
     @yield('meta_tag')
 
     <title>{{ config('app.name', 'Argon Dashboard') }} - @yield('title')</title>
