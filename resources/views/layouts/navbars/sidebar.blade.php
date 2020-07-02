@@ -7,7 +7,7 @@
         <!-- Brand -->
         <a class="navbar-brand pt-0" href="{{ route('home') }}">
 {{--            <img src="{{ asset('argon') }}/img/brand/blue.png" class="navbar-brand-img" alt="...">--}}
-            COVID19
+            <i class="fas fa-shield-virus fa-lg"></i> COVID-19
         </a>
         <!-- User -->
 {{--        <ul class="nav align-items-center d-md-none">--}}

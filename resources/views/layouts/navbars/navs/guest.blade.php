@@ -2,7 +2,7 @@
     <div class="container px-4">
         <a class="navbar-brand" href="{{ route('home') }}">
 {{--            <img src="{{ asset('argon') }}/img/brand/white.png" />--}}
-            COVID-19 statistics
+            <i class="fas fa-chart-line fa-lg"></i> COVID-19 statistics
         </a>
 {{--        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">--}}
 {{--            <span class="navbar-toggler-icon"></span>--}}

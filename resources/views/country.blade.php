@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    Country Statistics
+@endsection
+
 
 @section('content')
 
