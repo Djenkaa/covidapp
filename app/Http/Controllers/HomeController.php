@@ -105,13 +105,46 @@ class HomeController extends Controller
 
     public function travel()
     {
-        return view('travelAlert');
+        $countries = Http::get('http://api.coronatracker.com/v2/analytics/country');
+        $countriesList = [];
+
+        if($countries->successful()){
+
+            $countriesList = $countries->json();
+        }
+
+        return view('travelAlert', compact('countriesList'));
     }
 
 
     public function support()
     {
         return view('support');
+    }
+
+
+    public function news(Request $request)
+    {
+        $travel = Http::get('http://api.coronatracker.com/v1/travel-alert');
+
+        $filtered = $this->searchCountry($travel->json(), $request->selectCountry);
+
+        return redirect()->route('travel',['show'=>'true'])->with(['countryTravel'=>$filtered]);
+    }
+
+
+    public function searchCountry($array, $country)
+    {
+        $search = null;
+
+        foreach ($array as $key=>$value){
+
+            if($value['countryCode'] == $country){
+                $search = $value;
+                break;
+            }
+        }
+        return $search;
     }
 
 }

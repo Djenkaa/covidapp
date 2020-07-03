@@ -13,10 +13,10 @@
     @endphp
 
     @if($data)
-        @include('layouts.headers.guest',['text'=>$data['country']])
+        @include('layouts.headers.guest',['text'=>$data['country'],'icon'=>'fas fa-flag'])
 
     @else
-        @include('layouts.headers.guest',['text'=>'Select your country and get statistics about virus'])
+        @include('layouts.headers.guest',['text'=>'Select your country and get statistics about virus','icon'=>''])
     @endif
 
 

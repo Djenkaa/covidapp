@@ -2,7 +2,8 @@
     <div class="container">
         <div class="header-body text-center mb-7">
             <div class="row justify-content-center">
-                <div class="col-lg-5 col-md-6">
+                <div class="col-lg-5 col-md-6" style="color: rgba(255,255,255,.65);">
+                    <p><i class="{{$icon}} fa-3x"></i></p>
                     <h1 class="text-white">{{$text}}</h1>
                 </div>
             </div>
