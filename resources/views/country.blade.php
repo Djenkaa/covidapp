@@ -35,7 +35,16 @@
                                 <label for="">Select Country</label><br>
                                 <select name="selectCountry" id="">
                                     @foreach($countriesList as $country)
-                                        <option value="{{$country['countryCode']}}">{{$country['countryName']}}</option>
+
+                                        @if($data)
+                                            <option value="{{$country['countryCode']}}"
+                                                {{$country['countryCode'] == $data['countryCode'] ? 'selected' : ''}}
+                                            >
+                                                {{$country['countryName']}}
+                                            </option>
+                                        @else
+                                            <option value="{{$country['countryCode']}}">{{$country['countryName']}}</option>
+                                        @endif
                                     @endforeach
                                 </select><br><br>
                                 <button type="submit" class="btn btn-primary">Show</button>

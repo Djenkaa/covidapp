@@ -152,7 +152,7 @@
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('support')}}">
-                        <i class="fab fa-paypal"></i> Support
+                        <button class="btn btn-primary"><i class="fab fa-paypal"></i> Support Us</button>
                     </a>
                 </li>
 
