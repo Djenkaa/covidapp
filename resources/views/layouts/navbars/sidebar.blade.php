@@ -149,7 +149,7 @@
             <!-- Heading -->
 {{--            <h6 class="navbar-heading text-muted">Documentation</h6>--}}
 {{--            <!-- Navigation -->--}}
-            <ul class="navbar-nav mb-md-3">
+            <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('support')}}">
                         <button class="btn btn-primary"><i class="fab fa-paypal"></i> Support Us</button>
@@ -157,6 +157,19 @@
                 </li>
 
             </ul>
+
+            <hr class="my-3">
+
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-sync-alt fa-lg"></i>
+                        <span style="font-size: 13px;">The data is refreshed every 10 minutes</span>
+                    </a>
+                </li>
+
+            </ul>
+
         </div>
     </div>
 </nav>
