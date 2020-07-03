@@ -29,6 +29,8 @@ Route::post('/country/get','HomeController@getCountry')->name('country.get');
 Route::get('/travel', 'HomeController@travel')->name('travel');
 Route::get('/support', 'HomeController@support')->name('support');
 
+Route::post('/travel/news', 'HomeController@news')->name('travel.news');
+
 //Route::group(['middleware' => 'auth'], function () {
 //	Route::resource('user', 'UserController', ['except' => ['show']]);
 //	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
