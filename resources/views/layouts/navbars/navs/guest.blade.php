@@ -29,10 +29,10 @@
 {{--            <ul class="navbar-nav ml-auto">--}}
 {{--                <li class="nav-item">--}}
 {{--                    <a class="nav-link nav-link-icon" href="{{ route('home') }}">--}}
-{{--                        <i class="ni ni-planet"></i>--}}
-{{--                        <span class="nav-link-inner--text">{{ __('Dashboard') }}</span>--}}
+{{--                        <span class="nav-link-inner--text" style="font-size: 13px;">Data refresh in every 10 minutes</span>--}}
 {{--                    </a>--}}
 {{--                </li>--}}
+{{--      --}}
 {{--                <li class="nav-item">--}}
 {{--                    <a class="nav-link nav-link-icon" href="{{ route('register') }}">--}}
 {{--                        <i class="ni ni-circle-08"></i>--}}
