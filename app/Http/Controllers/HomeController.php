@@ -74,7 +74,9 @@ class HomeController extends Controller
 
         if($countries->successful()){
 
-            $countriesList = $countries->json();
+            $countriesList = array_values(Arr::sort($countries->json(), function ($value) {
+                return $value['countryName'];
+            }));
         }
 
         return view('country', compact('countriesList'));
@@ -110,7 +112,9 @@ class HomeController extends Controller
 
         if($countries->successful()){
 
-            $countriesList = $countries->json();
+            $countriesList = array_values(Arr::sort($countries->json(), function ($value) {
+                return $value['countryName'];
+            }));
         }
 
         return view('travelAlert', compact('countriesList'));
