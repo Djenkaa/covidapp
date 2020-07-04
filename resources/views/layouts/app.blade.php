@@ -17,6 +17,7 @@
 
     <meta property="og:title" content="Covid-19" />
     <meta property="og:description" content="Detailed statistics for the Covid-19 virus">
+    <meta property="og:image" content="/img/covid.jpg">
 
     @yield('meta_tag')
 
