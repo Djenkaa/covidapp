@@ -97,7 +97,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">
-                                            <h5 class="card-title text-uppercase text-muted mb-0">Daily Confirmed</h5>
+                                            <h5 class="card-title text-uppercase text-muted mb-0">Confirmed Today</h5>
                                             <span
                                                 class="h2 font-weight-bold mb-0">{{number_format($data['dailyConfirmed'])}}</span>
                                         </div>
@@ -122,7 +122,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">
-                                            <h5 class="card-title text-uppercase text-muted mb-0">Daily Deaths</h5>
+                                            <h5 class="card-title text-uppercase text-muted mb-0">Deaths Today</h5>
                                             <span
                                                 class="h2 font-weight-bold mb-0">{{number_format($data['dailyDeaths'])}}</span>
                                         </div>
