@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    @include('layouts.headers.guest', ['text'=>'We love building products that help the community, so please support if you can!','icon'=>''])
+    @include('layouts.headers.guest', ['text'=>'We love building products that help the community, so please support if you can!','icon'=>'fab fa-cc-paypal'])
 
     <div class="container mt--6 pb-5">
         <div class="row justify-content-center">
