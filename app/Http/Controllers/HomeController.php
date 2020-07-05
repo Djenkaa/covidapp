@@ -151,4 +151,73 @@ class HomeController extends Controller
         return $search;
     }
 
+
+    public function byDate(Request $request)
+    {
+        $now = Carbon::now()->toDateString();
+        $last7Days = Carbon::today()->subDays(7)->toDateString();
+
+        $byDate = Http::get('http://api.coronatracker.com/v3/analytics/newcases/country',[
+            'countryCode'=>$request->countryByDate,
+            'startDate'=>$last7Days,
+            'endDate'=> $now
+        ]);
+        $stats = [];
+
+        if($byDate->successful()){
+
+        $stats = $this->last7DaysStats($byDate->json());
+        }
+
+        return redirect()->route('country',['show'=>'true'])
+            ->with(['byDate'=>$stats]);
+    }
+
+
+    private function last7Days($num)
+    {
+        $dates = [];
+
+        for($i = 0; $i<7; $i++){
+
+            $date = Carbon::today()->subDays($i)->format('D');
+            array_push($dates, $date);
+        }
+        return array_reverse($dates);
+    }
+
+
+    private function last7DaysStats($array)
+    {
+        $days = $this->last7Days(7);
+        $ConfirmedByDate = [];
+        $DeathsByDate = [];
+        $RecoveredByDate = [];
+        $totalRecovered = 0;
+        $totalDeaths = 0;
+        $totalConfirmed = 0;
+
+        foreach ($array as $case){
+
+            array_push($ConfirmedByDate, $case['new_infections']);
+            array_push($DeathsByDate, $case['new_deaths']);
+            array_push($RecoveredByDate, $case['new_recovered']);
+
+            $totalConfirmed+=$case['new_infections'];
+            $totalDeaths+=$case['new_deaths'];
+            $totalRecovered+=$case['new_recovered'];
+        }
+        $byDate = [
+            'days'=>$days,
+            'dailyConfirmed'=> $ConfirmedByDate,
+            'dailyDeaths'=>$DeathsByDate,
+            'dailyRecovered'=>$RecoveredByDate,
+            'totalConfirmed'=>$totalConfirmed,
+            'totalDeaths'=>$totalDeaths,
+            'totalRecovered'=>$totalRecovered,
+            'country'=>$array[0]['country']
+        ];
+        return $byDate;
+    }
+
 }

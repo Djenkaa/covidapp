@@ -29,7 +29,8 @@ mix.scripts([
     'resources/js/myJS/numeral.js',
     'resources/js/myJS/Chart.min.js',
     'resources/js/myJS/Chart.extension.js',
-    'resources/js/myJS/argon.js'
+    'resources/js/myJS/argon.js',
+    'resources/js/myJS/countryChart.js'
 
 ],'public/js/all.js');
 
