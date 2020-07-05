@@ -640,7 +640,7 @@ var countryChart = (function() {
                 },
                 title:{
                     display:true,
-                    text:'Confirmed, Deaths and Recovered in the last 24 hours'
+                    text:'Confirmed, Deaths and Recovered in the last 7 days'
                 },
                 legend: {
                     display: true,
