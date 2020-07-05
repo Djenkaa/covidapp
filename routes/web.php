@@ -23,8 +23,10 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+
 Route::get('/country', 'HomeController@country')->name('country');
 Route::post('/country/get','HomeController@getCountry')->name('country.get');
+Route::post('/country/date', 'HomeController@byDate')->name('country.byDate');
 
 Route::get('/travel', 'HomeController@travel')->name('travel');
 Route::get('/support', 'HomeController@support')->name('support');

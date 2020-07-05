@@ -15,7 +15,7 @@
         @include('layouts.headers.guest',['text'=>$data['countryName'],'icon'=>'far fa-newspaper'])
 
     @else
-        @include('layouts.headers.guest',['text'=>'Select your country and get news about travel','icon'=>''])
+        @include('layouts.headers.guest',['text'=>'Select your country and get news about travel','icon'=>'far fa-newspaper'])
     @endif
 
 
@@ -31,7 +31,7 @@
                                 @csrf
 
                                 <label for="">Select Country</label><br>
-                                <select name="selectCountry" id="">
+                                <select class="form-control" name="selectCountry" id="">
                                     @foreach($countriesList as $country)
 
                                         @if($data)
@@ -44,7 +44,7 @@
                                             <option value="{{$country['countryCode']}}">{{$country['countryName']}}</option>
                                         @endif
                                     @endforeach
-                                </select><br><br>
+                                </select><br>
                                 <button type="submit" class="btn btn-primary">Show</button>
 
                             </form>
