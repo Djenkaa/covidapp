@@ -11,7 +11,9 @@
                             <div class="row">
                                 <div class="col">
                                     <h5 class="card-title text-uppercase text-muted mb-0">Total Confirmed</h5>
-                                    <span class="h2 font-weight-bold mb-0">{{number_format($total['totalConfirmed'])}}</span>
+                                    <span id="globalConfirmed" class="h2 font-weight-bold mb-0">
+                                       Loading ...
+                                    </span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -32,7 +34,7 @@
                             <div class="row">
                                 <div class="col">
                                     <h5 class="card-title text-uppercase text-muted mb-0">Total Deaths</h5>
-                                    <span class="h2 font-weight-bold mb-0">{{number_format($total['totalDeaths'])}}</span>
+                                    <span id="globalDeaths" class="h2 font-weight-bold mb-0">Loading ...</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -53,7 +55,7 @@
                             <div class="row">
                                 <div class="col">
                                     <h5 class="card-title text-uppercase text-muted mb-0">Total Recovered</h5>
-                                    <span class="h2 font-weight-bold mb-0">{{number_format($total['totalRecovered'])}}</span>
+                                    <span id="globalRecovered" class="h2 font-weight-bold mb-0">Loading ...</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-success text-white rounded-circle shadow">
@@ -74,7 +76,7 @@
                             <div class="row">
                                 <div class="col">
                                     <h5 class="card-title text-uppercase text-muted mb-0">Active Cases</h5>
-                                    <span class="h2 font-weight-bold mb-0">{{number_format($total['totalActiveCases'])}}</span>
+                                    <span id="globalActive" class="h2 font-weight-bold mb-0">Loading ...</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-info text-white rounded-circle shadow">

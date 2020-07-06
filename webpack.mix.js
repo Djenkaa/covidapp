@@ -19,6 +19,7 @@ mix.js('resources/js/app.js', 'public/js')
 mix.styles([
     'resources/css/argon.css',
     'resources/css/nucleo.css',
+    'resources/css/loader.css'
 
 ], 'public/css/all.css');
 
@@ -26,6 +27,7 @@ mix.styles([
 mix.scripts([
     'resources/js/myJS/jquery.min.js',
     'resources/js/myJS/bootstrap.bundle.min.js',
+    'resources/js/myJS/moment.js',
     'resources/js/myJS/numeral.js',
     'resources/js/myJS/Chart.min.js',
     'resources/js/myJS/Chart.extension.js',
