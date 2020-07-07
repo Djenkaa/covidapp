@@ -1,105 +1,84 @@
 'use strict';
 
 
-// function Last7Days () {
-//
-//     var result = [];
-//     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-//     for (var i=0; i<7; i++) {
-//         var d = new Date();
-//         d.setDate(d.getDate() - i);
-//
-//         result.push(d.getDate() + ' ' + months[d.getMonth()]);
-//     }
-//
-//    return result.reverse();
-// }
-//
-//
-//
-// function last7Day() {
-//
-//     var d = new Date();
-//
-//    d.setDate(d.getDate() - 7);
-//
-//     var year = d.getFullYear();
-//     var month = d.getMonth();
-//     var date = d.getDate();
-//
-//     if(month < 10){
-//         month = '0' + month;
-//     }
-//     if(date < 10){
-//         date= '0' + date;
-//     }
-//
-//    var result = year + '-' + month + '-' + date;
-//
-//    return result;
-//
-// }
-//
-//
-// function currentDate(){
-//
-//     var d = new Date();
-//     var year = d.getFullYear();
-//     var month = d.getMonth();
-//     var date = d.getDate();
-//
-//     if(month < 10){
-//         month = '0' + month;
-//     }
-//     if(date < 10){
-//         date= '0' + date;
-//     }
-//
-//     var result = year+ '-' + month + '-' + date;
-//
-//     return result;
-// }
-//
-//
-// function ajaxLast7Days() {
-//
-// console.log(last7Day());
-//     $.ajax({
-//         url: `http://api.coronatracker.com/v3/analytics/trend/country?countryCode=rs&startDate${last7Day()}=&endDate=${currentDate()}`,
-//         method:'GET',
-//         type:'JSON',
-//         success:function (data) {
-//             console.log(data);
-//         },
-//         error:function (e) {
-//             console.log(e);
-//         }
-//     });
-// }
-//
-// ajaxLast7Days();
 
-// var Tooltip = (function() {
-//
-//     // Variables
-//
-//     var $tooltip = $('[data-toggle="tooltip"]');
-//
-//
-//     // Methods
-//
-//     function init() {
-//         $tooltip.tooltip();
-//     }
-//
-//
-//     // Events
-//
-//     if ($tooltip.length) {
-//         init();
-//     }
-//
-// })();
+$(document).ready(function () {
+
+    getCountries();
+
+
+    $(document).on('click', '#showGeneral', function () {
+
+        $('#countryStats').hide();
+        $('#countryLast7Days').hide();
+        $('.countries').hide();
+        $('.countryStatsLoader').show();
+        var country = $('select[name="selectCountry"]').children("option:selected").val();
+
+        $.get('http://api.coronatracker.com/v3/stats/worldometer/global')
+            .done(function (global) {
+
+                if (global) {
+
+                    console.log(global);
+
+                    $.get(`http://api.coronatracker.com/v3/stats/worldometer/country?countryCode=${country}`)
+                        .done(function (data) {
+
+
+                            if (data) {
+
+                                $('.countryStatsLoader').hide();
+                                $('.countries').show();
+                                countryStats(data[0], global);
+
+                                $('html, body').animate({
+                                    scrollTop: 600
+                                }, 500, 'swing');
+                            }
+
+                        });
+                }
+            });
+    });
+
+
+    $(document).on('click', '#showLast7Days', function () {
+
+        $('#countryLast7Days').hide();
+        $('#countryStats').hide();
+        $('.countries').hide();
+        $('.countryStatsLoader').show();
+
+
+        var country = $('select[name="countryByDate"]').children("option:selected").val();
+
+        var now = moment().format('YYYY-MM-DD');
+        var last7Days = moment().subtract(7, 'd').format('YYYY-MM-DD');
+
+        $.get(`http://api.coronatracker.com/v3/analytics/newcases/country?countryCode=${country}&startDate=${last7Days}&endDate=${now}`)
+            .done(function (data) {
+
+                if (data) {
+
+                    $('.countryStatsLoader').hide();
+                    $('.countries').show();
+
+                    displayLast7DaysChart(data);
+
+                    totalResult7Days(data);
+
+                    $('html, body').animate({
+                        scrollTop: 600
+                    }, 500, 'swing');
+
+                }
+            });
+    });
+
+
+});
+
 
 //
 // Charts
@@ -511,7 +490,7 @@
 // Orders chart
 //
 
-var OrdersChart = (function() {
+var OrdersChart = (function () {
 
     //
     // Variables
@@ -535,7 +514,7 @@ var OrdersChart = (function() {
                 scales: {
                     yAxes: [{
                         ticks: {
-                            callback: function(value) {
+                            callback: function (value) {
                                 if (!(value % 10)) {
                                     //return '$' + value + 'k'
                                     return value
@@ -546,7 +525,7 @@ var OrdersChart = (function() {
                 },
                 tooltips: {
                     callbacks: {
-                        label: function(item, data) {
+                        label: function (item, data) {
                             var label = data.datasets[item.datasetIndex].label || '';
                             var yLabel = item.yLabel;
                             var content = '';
@@ -593,14 +572,14 @@ var OrdersChart = (function() {
 // Sales chart
 //
 
-var countryChart = (function() {
+var countryChart = function (stats) {
 
     // Variables
 
     var $chart = $('#daily');
-    var data = $('#dailyByDate').data('daily');
 
     // Methods
+    console.log(stats);
 
     function init($chart) {
 
@@ -614,7 +593,7 @@ var countryChart = (function() {
                             zeroLineColor: Charts.colors.gray[900]
                         },
                         ticks: {
-                            callback: function(value) {
+                            callback: function (value) {
                                 if (!(value % 10)) {
                                     return numeral(value).format('0,0');
                                 }
@@ -624,13 +603,13 @@ var countryChart = (function() {
                 },
                 tooltips: {
                     callbacks: {
-                        label: function(item, data) {
+                        label: function (item, data) {
                             var label = data.datasets[item.datasetIndex].label || '';
                             var yLabel = numeral(item.yLabel).format('0,0');
                             var content = '';
 
                             if (data.datasets.length > 1) {
-                                content += '<span class="popover-body-label mr-auto">' + label + ': ' + yLabel +' </span>';
+                                content += '<span class="popover-body-label mr-auto">' + label + ': ' + yLabel + ' </span>';
                             }
 
                             // content += ' <span class="popover-body-value">' + yLabel +'</span>';
@@ -638,9 +617,9 @@ var countryChart = (function() {
                         }
                     }
                 },
-                title:{
-                    display:true,
-                    text:'Confirmed, Deaths and Recovered in the last 7 days'
+                title: {
+                    display: true,
+                    text: 'Confirmed, Deaths and Recovered in the last 7 days'
                 },
                 legend: {
                     display: true,
@@ -648,20 +627,20 @@ var countryChart = (function() {
                 },
             },
             data: {
-                labels: data.days,
+                labels: stats.days,
                 datasets: [{
                     label: 'Confirmed',
-                    data: data.dailyConfirmed,
+                    data: stats.confirmedByDate,
                     backgroundColor: '#fb6340'
                 },
                     {
                         label: 'Deaths',
-                        data: data.dailyDeaths,
+                        data: stats.deathsByDate,
                         backgroundColor: '#f5365c'
                     },
                     {
                         label: 'Recovered',
-                        data: data.dailyRecovered,
+                        data: stats.recoveredByDate,
                         backgroundColor: '#2dce89'
                     }
                 ]
@@ -680,6 +659,119 @@ var countryChart = (function() {
     if ($chart.length) {
 
         init($chart);
+        $('#countryLast7Days').show();
     }
 
-})();
+};
+
+
+function countryStats(data, global) {
+
+    $('#countryActive').text(numeral(data.activeCases).format('0,0'));
+    $('#countryRecovered').text(numeral(data.totalRecovered).format('0,0'));
+    $('#countryDeaths').text(numeral(data.totalDeaths).format('0,0'));
+    $('.countryConfirmed').text(numeral(data.totalConfirmed).format('0,0'));
+
+    $('.countryName').text(data.country);
+    $('#countryConfirmedToday').text(numeral(data.dailyConfirmed).format('0,0'));
+    $('#countryDeathsToday').text(numeral(data.dailyDeaths).format('0,0'));
+    $('#countryConfirmedPerMill').text(numeral(data.totalConfirmedPerMillionPopulation).format('0,0'));
+
+    $('#activePerc').text(percentage(data.activeCases, global.totalActiveCases) + '%');
+    $('#confirmedPerc').text(percentage(data.totalConfirmed, global.totalConfirmed) + '%');
+    $('#deathsPerc').text(percentage(data.totalDeaths, global.totalDeaths) + '%');
+    $('#recoveredPerc').text(percentage(data.totalRecovered, global.totalRecovered) + '%');
+
+    $('#countryPercentage').text(percentage(data.totalConfirmed, global.totalConfirmed) + '%');
+    $('#countryConfirmedBar').width(percentage(data.totalConfirmed, global.totalConfirmed) + '%');
+
+    $('#countryStats').show();
+}
+
+
+function percentage(a, b) {
+
+    var result = parseInt(a) / parseInt(b) * 100;
+
+    return result.toFixed(2);
+}
+
+
+function getCountries() {
+
+    $.get('http://api.coronatracker.com/v2/analytics/country')
+        .done(function (data) {
+
+            if (data) {
+
+                $('.countriesLoader').hide();
+                countriesTemplate(_.sortBy(data, 'countryName'));
+            }
+        });
+}
+
+
+function countriesTemplate(data) {
+
+    var temp = ``;
+
+    console.log(data);
+
+    for (var i = 0; i < data.length; i++) {
+
+        temp += `<option value="${data[i].countryCode}">${data[i].countryName}</option>`;
+    }
+
+    $('select[name="selectCountry"]').html(temp);
+    $('select[name="countryByDate"]').html(temp);
+    $('.countries').show();
+
+}
+
+
+function displayLast7DaysChart(data) {
+
+    var confirmedByDate = [];
+    var deathsByDate = [];
+    var recoveredByDate = [];
+
+
+    for (var i = 0; i < data.length; i++) {
+
+        confirmedByDate.push(data[i].new_infections);
+        deathsByDate.push(data[i].new_deaths);
+        recoveredByDate.push(data[i].new_recovered);
+
+    }
+    var days = [];
+
+    for (var w = 1; w <= 7; w++) {
+
+        var date = moment().subtract(w, 'd').format('DD.MMM');
+        days.unshift(date);
+    }
+
+    countryChart({confirmedByDate, deathsByDate, recoveredByDate, days});
+}
+
+
+function totalResult7Days(data) {
+
+    var confirmedLast7 = 0;
+    var recoveredLast7 = 0;
+    var deathsLast7 = 0;
+
+    for (var i = 0; i < data.length; i++) {
+
+        confirmedLast7 += data[i].new_infections;
+        recoveredLast7 += data[i].new_recovered;
+        deathsLast7 += data[i].new_deaths;
+    }
+
+    $('#countryConfirmed7').text(numeral(confirmedLast7).format('0,0'));
+    $('#countryDeaths7').text(numeral(deathsLast7).format('0,0'));
+    $('#countryRecovered7').text(numeral(recoveredLast7).format('0,0'));
+}
+
+
+

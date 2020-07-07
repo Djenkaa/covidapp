@@ -1241,7 +1241,6 @@ function top5ConfirmedTemplate(data, global) {
 
 
 
-// var now = moment().format('YYYY-MM-DD');
-// var last7Days = moment().day(-6).format('YYYY-MM-DD');
+
 
 

@@ -69,40 +69,40 @@ class HomeController extends Controller
 
     public function country()
     {
-        $countries = Http::get('http://api.coronatracker.com/v2/analytics/country');
-        $countriesList = [];
+//        $countries = Http::get('http://api.coronatracker.com/v2/analytics/country');
+//        $countriesList = [];
+//
+//        if($countries->successful()){
+//
+//            $countriesList = array_values(Arr::sort($countries->json(), function ($value) {
+//                return $value['countryName'];
+//            }));
+//        }
 
-        if($countries->successful()){
-
-            $countriesList = array_values(Arr::sort($countries->json(), function ($value) {
-                return $value['countryName'];
-            }));
-        }
-
-        return view('country', compact('countriesList'));
+        return view('country');
     }
 
 
-    public function getCountry(Request $request)
-    {
-        $country = $request->selectCountry;
-
-        $show = Http::get("http://api.coronatracker.com/v3/stats/worldometer/country",[
-            'countryCode'=>$country
-        ]);
-        $total = Http::get('http://api.coronatracker.com/v3/stats/worldometer/global');
-
-        $countryShow =[];
-        $totalStat = [];
-
-        if($show->successful() && $total->successful()){
-
-            $countryShow = $show->json()[0];
-            $totalStat = $total->json();
-        }
-
-        return redirect()->route('country',['show'=>'true'])->with(['countryShow'=>$countryShow, 'total'=>$totalStat]);
-    }
+//    public function getCountry(Request $request)
+//    {
+//        $country = $request->selectCountry;
+//
+//        $show = Http::get("http://api.coronatracker.com/v3/stats/worldometer/country",[
+//            'countryCode'=>$country
+//        ]);
+//        $total = Http::get('http://api.coronatracker.com/v3/stats/worldometer/global');
+//
+//        $countryShow =[];
+//        $totalStat = [];
+//
+//        if($show->successful() && $total->successful()){
+//
+//            $countryShow = $show->json()[0];
+//            $totalStat = $total->json();
+//        }
+//
+//        return redirect()->route('country',['show'=>'true'])->with(['countryShow'=>$countryShow, 'total'=>$totalStat]);
+//    }
 
 
     public function travel()
