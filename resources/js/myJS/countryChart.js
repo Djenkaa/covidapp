@@ -20,7 +20,6 @@ $(document).ready(function () {
 
                 if (global) {
 
-                   var parseGlobal = JSON.parse(global);
 
                     $.get(`https://api.coronatracker.com/v3/stats/worldometer/country?countryCode=${country}`)
                         .done(function (data) {
@@ -30,7 +29,7 @@ $(document).ready(function () {
 
                                 $('.countryStatsLoader').hide();
                                 $('.countries').show();
-                                countryStats(data[0], parseGlobal);
+                                countryStats(data[0], global);
 
                                 $('html, body').animate({
                                     scrollTop: 600
