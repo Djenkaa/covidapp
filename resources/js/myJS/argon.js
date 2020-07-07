@@ -1144,12 +1144,15 @@ function mostVulnerableCountries() {
         type: 'JSON',
         success: function (global) {
 
+
             if (global) {
 
-                $('#globalConfirmed').text(numeral(global.totalConfirmed).format('0,0'));
-                $('#globalDeaths').text(numeral(global.totalDeaths).format('0,0'));
-                $('#globalRecovered').text(numeral(global.totalRecovered).format('0,0'));
-                $('#globalActive').text(numeral(global.totalActiveCases).format('0,0'));
+                var parseGlobal = JSON.parse(global);
+
+                $('#globalConfirmed').text(numeral(parseGlobal.totalConfirmed).format('0,0'));
+                $('#globalDeaths').text(numeral(parseGlobal.totalDeaths).format('0,0'));
+                $('#globalRecovered').text(numeral(parseGlobal.totalRecovered).format('0,0'));
+                $('#globalActive').text(numeral(parseGlobal.totalActiveCases).format('0,0'));
 
                 $.ajax({
                     url: 'https://api.coronatracker.com/v3/stats/worldometer/country?limit=5',
@@ -1162,7 +1165,7 @@ function mostVulnerableCountries() {
                             $('#mostVulnerableCountriesLoader').hide();
                             mostVulnerableCountriesTemplate(data);
                             $('#top5ConfirmedLoader').hide();
-                            top5ConfirmedTemplate(data, global);
+                            top5ConfirmedTemplate(data, parseGlobal);
 
                         }
                     },
