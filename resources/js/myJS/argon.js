@@ -1147,7 +1147,6 @@ function mostVulnerableCountries() {
 
             if (global) {
 
-                var parseGlobal = JSON.parse(global);
 
                 $('#globalConfirmed').text(numeral(parseGlobal.totalConfirmed).format('0,0'));
                 $('#globalDeaths').text(numeral(parseGlobal.totalDeaths).format('0,0'));
@@ -1165,7 +1164,7 @@ function mostVulnerableCountries() {
                             $('#mostVulnerableCountriesLoader').hide();
                             mostVulnerableCountriesTemplate(data);
                             $('#top5ConfirmedLoader').hide();
-                            top5ConfirmedTemplate(data, parseGlobal);
+                            top5ConfirmedTemplate(data, global);
 
                         }
                     },
