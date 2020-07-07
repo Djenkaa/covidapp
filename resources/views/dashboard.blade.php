@@ -5,8 +5,7 @@
     @endsection
 
 @section('content')
-    @include('layouts.headers.cards',['total'=>$worldTotal])
-
+    @include('layouts.headers.cards')
 
     <div class="container-fluid mt--7">
         <div class="row">
@@ -16,14 +15,17 @@
                         <div class="row align-items-center">
                             <div class="col">
                                 <h6 class="text-uppercase text-light ls-1 mb-1">Overview</h6>
-                                <h2 class="text-white mb-0">Daily Confirmed Cases</h2>
+                                <h2 class="text-white mb-0">Daily Confirmed Cases </h2>
                             </div>
 
                         </div>
                     </div>
+
                     <div class="card-body">
                         <!-- Chart -->
+
                         <div class="chart">
+                            <div id="dailyTop10Loader" class="loader"></div>
                             <!-- Chart wrapper -->
                             <canvas id="chart-sales" class="chart-canvas"></canvas>
                         </div>
@@ -54,23 +56,24 @@
                                     <th scope="col">Recovered</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                            @foreach($top5Confirmed as $country)
-                                <tr>
-                                    <th scope="row">
-                                        {{$country['country']}}
-                                    </th>
-                                    <td>
-                                        {{number_format($country['confirmed'])}}
-                                    </td>
-                                    <td>
-                                        <i class="text-danger fas fa-arrow-down"></i> {{number_format($country['deaths'])}}
-                                    </td>
-                                    <td>
-                                        <i class="fas fa-arrow-up text-success mr-3"></i> {{number_format($country['recovered'])}}
-                                    </td>
-                                </tr>
-                                @endforeach
+                            <tbody id="mostVulnerableCountries">
+                                <div id="mostVulnerableCountriesLoader" class="loader" style="color: #5e72e4"></div>
+{{--                            @foreach($top5Confirmed as $country)--}}
+{{--                                <tr>--}}
+{{--                                    <th scope="row">--}}
+{{--                                        {{$country['country']}}--}}
+{{--                                    </th>--}}
+{{--                                    <td>--}}
+{{--                                        {{number_format($country['confirmed'])}}--}}
+{{--                                    </td>--}}
+{{--                                    <td>--}}
+{{--                                        <i class="text-danger fas fa-arrow-down"></i> {{number_format($country['deaths'])}}--}}
+{{--                                    </td>--}}
+{{--                                    <td>--}}
+{{--                                        <i class="fas fa-arrow-up text-success mr-3"></i> {{number_format($country['recovered'])}}--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                                @endforeach--}}
 
                             </tbody>
                         </table>
@@ -99,31 +102,33 @@
                                     <th scope="col">of the Total</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="top5Confirmed">
 
-                            @foreach($top5Confirmed as $top)
-                                <tr>
-                                    <th scope="row">
-                                        {{$top['country']}}
-                                    </th>
-                                    <td>
-                                        {{number_format($top['confirmed'])}}
-                                    </td>
-                                    <td>
-                                        @php
-                                        $bar = (int)$top['confirmed'] / (int)$worldTotal['totalConfirmed'] * 100;
-                                        @endphp
-                                        <div class="d-flex align-items-center">
-                                            <span class="mr-2">{{number_format($bar,2)}}%</span>
-                                            <div>
-                                                <div class="progress">
-                                                <div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="{{$bar}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$bar}}%;"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endforeach
+                            <div class="loader" id="top5ConfirmedLoader" style="color: #5e72e4"></div>
+
+{{--                            @foreach($top5Confirmed as $top)--}}
+{{--                                <tr>--}}
+{{--                                    <th scope="row">--}}
+{{--                                        {{$top['country']}}--}}
+{{--                                    </th>--}}
+{{--                                    <td>--}}
+{{--                                        {{number_format($top['confirmed'])}}--}}
+{{--                                    </td>--}}
+{{--                                    <td>--}}
+{{--                                        @php--}}
+{{--                                        $bar = (int)$top['confirmed'] / (int)$worldTotal['totalConfirmed'] * 100;--}}
+{{--                                        @endphp--}}
+{{--                                        <div class="d-flex align-items-center">--}}
+{{--                                            <span class="mr-2">{{number_format($bar,2)}}%</span>--}}
+{{--                                            <div>--}}
+{{--                                                <div class="progress">--}}
+{{--                                                <div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="{{$bar}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$bar}}%;"></div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                                @endforeach--}}
 
                             </tbody>
                         </table>

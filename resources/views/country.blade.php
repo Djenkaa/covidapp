@@ -7,19 +7,7 @@
 
 @section('content')
 
-    @php
-        $data = session()->get('countryShow');
-        $total = session()->get('total');
-        $byDate = session()->get('byDate');
-    @endphp
-
-    @if($data || $byDate)
-        @include('layouts.headers.guest',['text'=>$data['country']?? $byDate['country'],'icon'=>'fas fa-flag'])
-
-    @else
         @include('layouts.headers.guest',['text'=>'Select your country and get statistics about virus','icon'=>'fas fa-flag'])
-    @endif
-
 
 
     <div class="container mt--8 pb-5">
@@ -35,13 +23,13 @@
                                 <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text"
                                     role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link mb-sm-3 mb-md-0 {{$byDate ? '' : 'active'}}" id="tabs-icons-text-1-tab"
+                                        <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-icons-text-1-tab"
                                            data-toggle="tab" href="#tabs-icons-text-1" role="tab"
                                            aria-controls="tabs-icons-text-1" aria-selected="true"><i
                                                 class="fas fa-chart-area"></i> General</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link mb-sm-3 mb-md-0 {{$byDate ? 'active' : ''}}" id="tabs-icons-text-2-tab" data-toggle="tab"
+                                        <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-2-tab" data-toggle="tab"
                                            href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-2"
                                            aria-selected="false"><i class="fas fa-calendar-alt"></i> Last 7 days</a>
                                     </li>
@@ -50,61 +38,40 @@
                             <div class="card shadow mb-3">
                                 <div class="card-body">
                                     <div class="tab-content" id="myTabContent">
-                                        <div class="tab-pane fade {{ $byDate ? '' : 'show active' }}" id="tabs-icons-text-1" role="tabpanel"
+                                        <div class="tab-pane fade show active" id="tabs-icons-text-1" role="tabpanel"
                                              aria-labelledby="tabs-icons-text-1-tab">
 
-                                            <form action="{{route('country.get')}}" method="POST">
-                                                @csrf
+                                            <div class="loader countriesLoader" style="color: #5e72e4;"></div>
+                                            <div class="loader countryStatsLoader" style="color: #5e72e4;display: none;"></div>
+
+                                                <div class="countries" style="display: none;">
 
                                                 <label for="">Select Country</label><br>
                                                 <select class="form-control" name="selectCountry" id="">
-                                                    @foreach($countriesList as $country)
 
-                                                        @if($data)
-                                                            <option value="{{$country['countryCode']}}"
-                                                                {{$country['countryCode'] == $data['countryCode'] ? 'selected' : ''}}
-                                                            >
-                                                                {{$country['countryName']}}
-                                                            </option>
-                                                        @else
-                                                            <option
-                                                                value="{{$country['countryCode']}}">{{$country['countryName']}}</option>
-                                                        @endif
-                                                    @endforeach
                                                 </select><br>
-                                                <button type="submit" class="btn btn-primary">Show general</button>
+                                                <button id="showGeneral" class="btn btn-primary">Show general</button>
 
-                                            </form>
+                                                </div>
+
 
                                         </div>
-                                        <div class="tab-pane fade {{ $byDate ? 'show active' : '' }}" id="tabs-icons-text-2" role="tabpanel"
+                                        <div class="tab-pane fade" id="tabs-icons-text-2" role="tabpanel"
                                              aria-labelledby="tabs-icons-text-2-tab">
 
+                                            <div class="loader countriesLoader" style="color: #5e72e4;"></div>
+                                            <div class="loader countryStatsLoader" style="color: #5e72e4;display: none;"></div>
+
+                                            <div class="countries" style="display: none;">
+
                                             <label for="">Select Country</label><br>
-                                            <form action="{{route('country.byDate')}}" method="POST">
-                                                @csrf
 
                                                 <select class="form-control" name="countryByDate" id="">
 
-                                                    @foreach($countriesList as $country)
-
-                                                        @if($byDate)
-                                                            <option value="{{$country['countryCode']}}"
-                                                                {{$country['countryName'] == $byDate['country'] ? 'selected' : ''}}
-                                                            >
-                                                                {{$country['countryName']}}
-                                                            </option>
-                                                        @else
-                                                            <option
-                                                                value="{{$country['countryCode']}}">{{$country['countryName']}}</option>
-                                                        @endif
-
-                                                    @endforeach
-
                                                 </select><br>
-                                                <button class="btn btn-primary">Show last 7 days</button>
+                                                <button id="showLast7Days" class="btn btn-primary">Show last 7 days</button>
 
-                                            </form>
+                                            </div>
 
                                         </div>
                                     </div>
@@ -122,10 +89,10 @@
     </div>
 
     {{--  CHARTS  --}}
-    @if(request()->query('show') && $byDate)
 
 
-        <div class="container-fluid">
+
+        <div class="container-fluid" id="countryLast7Days" style="display: none;">
             <div class="row mb-5">
                 <div class="col-xl-8 mb-5 mb-xl-0">
                     <div class="card bg-gradient-default shadow">
@@ -139,7 +106,7 @@
                         </div>
                         <div class="card-body">
                             <!-- Chart -->
-                            <div class="chart" id="dailyByDate" data-daily="{{json_encode($byDate)}}">
+                            <div class="chart" id="dailyByDate">
                                 <!-- Chart wrapper -->
                                 <canvas id="daily" class="chart-canvas"></canvas>
                             </div>
@@ -172,7 +139,7 @@
                                                 <div class="col">
                                                     <h5 class="card-title text-uppercase text-muted mb-0">Confirmed Cases </h5>
                                                     <span
-                                                        class="h2 font-weight-bold mb-0">{{number_format($byDate['totalConfirmed'])}}</span>
+                                                        class="h2 font-weight-bold mb-0" id="countryConfirmed7"></span>
                                                 </div>
                                                 <div class="col-auto">
                                                     <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -195,7 +162,7 @@
                                                 <div class="col">
                                                     <h5 class="card-title text-uppercase text-muted mb-0">Deaths Cases</h5>
                                                     <span
-                                                        class="h2 font-weight-bold mb-0">{{number_format($byDate['totalDeaths'])}}</span>
+                                                        class="h2 font-weight-bold mb-0" id="countryDeaths7"></span>
                                                 </div>
                                                 <div class="col-auto">
                                                     <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -218,7 +185,7 @@
                                                 <div class="col">
                                                     <h5 class="card-title text-uppercase text-muted mb-0">Recovered Cases</h5>
                                                     <span
-                                                        class="h2 font-weight-bold mb-0">{{number_format($byDate['totalRecovered'])}}</span>
+                                                        class="h2 font-weight-bold mb-0" id="countryRecovered7"></span>
                                                 </div>
                                                 <div class="col-auto">
                                                     <div class="icon icon-shape bg-success text-white rounded-circle shadow">
@@ -245,14 +212,10 @@
         </div>
 
 
-       @endif
 
 
 
-
-    @if(request()->query('show') && $data)
-
-        <div class="container-fluid mb-5">
+        <div class="container-fluid mb-5" id="countryStats" style="display: none;">
         <div class="header bg-gradient-primary pb-5 pt-5 shadow">
             <div class="container-fluid">
                 <div class="header-body">
@@ -264,8 +227,8 @@
                                     <div class="row">
                                         <div class="col">
                                             <h5 class="card-title text-uppercase text-muted mb-0">Active Cases</h5>
-                                            <span
-                                                class="h2 font-weight-bold mb-0">{{number_format($data['activeCases'])}}</span>
+                                            <span id="countryActive"
+                                                class="h2 font-weight-bold mb-0"></span>
                                         </div>
                                         <div class="col-auto">
                                             <div class="icon icon-shape bg-info text-white rounded-circle shadow">
@@ -273,11 +236,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @php
-                                        $percentageActive = (int)$data['activeCases'] / (int)$total['totalActiveCases'] * 100;
-                                    @endphp
+
                                     <p class="mt-3 mb-0 text-muted text-sm">
-                                        <span class="text-danger mr-2"> {{number_format($percentageActive,2)}}%</span>
+                                        <span class="text-danger mr-2" id="activePerc"> %</span>
                                         <span class="text-nowrap">total of the world</span>
                                     </p>
                                 </div>
@@ -290,7 +251,7 @@
                                         <div class="col">
                                             <h5 class="card-title text-uppercase text-muted mb-0">Total Confirmed</h5>
                                             <span
-                                                class="h2 font-weight-bold mb-0">{{number_format($data['totalConfirmed'])}}</span>
+                                                class="h2 font-weight-bold mb-0 countryConfirmed"></span>
                                         </div>
                                         <div class="col-auto">
                                             <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -298,11 +259,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @php
-                                        $percentageConfirmed = (int)$data['totalConfirmed'] / (int)$total['totalConfirmed'] * 100;
-                                    @endphp
+
                                     <p class="mt-3 mb-0 text-muted text-sm">
-                                        <span class="text-danger mr-2"> {{number_format($percentageConfirmed,2)}}%</span>
+                                        <span class="text-danger mr-2" id="confirmedPerc"> %</span>
                                         <span class="text-nowrap">total of the world</span>
                                     </p>
                                 </div>
@@ -314,8 +273,8 @@
                                     <div class="row">
                                         <div class="col">
                                             <h5 class="card-title text-uppercase text-muted mb-0">Total Deaths</h5>
-                                            <span
-                                                class="h2 font-weight-bold mb-0">{{number_format($data['totalDeaths'])}}</span>
+                                            <span id="countryDeaths"
+                                                class="h2 font-weight-bold mb-0"></span>
                                         </div>
                                         <div class="col-auto">
                                             <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -323,11 +282,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @php
-                                        $percentageDeaths = (int)$data['totalDeaths'] / (int)$total['totalDeaths'] * 100;
-                                    @endphp
+
                                     <p class="mt-3 mb-0 text-muted text-sm">
-                                        <span class="text-danger mr-2"> {{number_format($percentageDeaths,2)}}%</span>
+                                        <span class="text-danger mr-2" id="deathsPerc"> %</span>
                                         <span class="text-nowrap">total of the world</span>
                                     </p>
                                 </div>
@@ -339,8 +296,8 @@
                                     <div class="row">
                                         <div class="col">
                                             <h5 class="card-title text-uppercase text-muted mb-0">Total Recovered</h5>
-                                            <span
-                                                class="h2 font-weight-bold mb-0">{{number_format($data['totalRecovered'])}}</span>
+                                            <span id="countryRecovered"
+                                                class="h2 font-weight-bold mb-0"></span>
                                         </div>
                                         <div class="col-auto">
                                             <div class="icon icon-shape bg-success text-white rounded-circle shadow">
@@ -348,11 +305,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @php
-                                        $percentageperMill = (int)$data['totalRecovered'] / (int)$total['totalConfirmed'] * 100;
-                                    @endphp
+
                                     <p class="mt-3 mb-0 text-muted text-sm">
-                                        <span class="text-success mr-2"> {{number_format($percentageperMill,2)}}%</span>
+                                        <span class="text-success mr-2" id="recoveredPerc"> %</span>
                                         <span class="text-nowrap">total of the world</span>
                                     </p>
                                 </div>
@@ -393,17 +348,17 @@
                                 <tbody>
 
                                 <tr>
-                                    <th scope="row">
-                                        {{$data['country']}}
+                                    <th scope="row" class="countryName">
+
                                     </th>
-                                    <td>
-                                        {{number_format($data['dailyConfirmed'])}}
+                                    <td id="countryConfirmedToday">
+
                                     </td>
                                     <td>
-                                        <i class="text-danger fas fa-arrow-up"></i> {{number_format($data['dailyDeaths'])}}
+                                        <i class="text-danger fas fa-arrow-up"></i> <span id="countryDeathsToday"></span>
                                     </td>
                                     <td>
-                                        <i class="fas fa-arrow-up text-danger mr-3"></i> {{number_format($data['totalConfirmedPerMillionPopulation'])}}
+                                        <i class="fas fa-arrow-up text-danger mr-3"></i> <span id="countryConfirmedPerMill"></span>
                                     </td>
                                 </tr>
 
@@ -436,27 +391,20 @@
                                 </thead>
                                 <tbody>
 
-
                                 <tr>
-                                    <th scope="row">
-                                        {{$data['country']}}
+                                    <th scope="row" class="countryName">
+
                                     </th>
-                                    <td>
-                                        {{number_format($data['totalConfirmed'])}}
+                                    <td class="countryConfirmed">
+
                                     </td>
                                     <td>
 
-                                        @php
-                                            $bar = (int) $data['totalConfirmed'] / $total['totalConfirmed'] * 100;
-                                        @endphp
-
                                         <div class="d-flex align-items-center">
-                                            <span class="mr-2">{{number_format($bar,2)}}%</span>
+                                            <span class="mr-2" id="countryPercentage">%</span>
                                             <div>
                                                 <div class="progress">
-                                                    <div class="progress-bar bg-gradient-danger" role="progressbar"
-                                                         aria-valuenow="{{$bar}}" aria-valuemin="0" aria-valuemax="100"
-                                                         style="width: {{$bar}}%;"></div>
+                                                    <div id="countryConfirmedBar" class="progress-bar bg-gradient-danger" role="progressbar"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -472,8 +420,6 @@
             </div>
 
         </div>
-
-    @endif
 
 
 @endsection
