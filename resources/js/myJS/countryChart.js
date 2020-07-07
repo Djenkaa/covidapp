@@ -15,14 +15,14 @@ $(document).ready(function () {
         $('.countryStatsLoader').show();
         var country = $('select[name="selectCountry"]').children("option:selected").val();
 
-        $.get('http://api.coronatracker.com/v3/stats/worldometer/global')
+        $.get('https://api.coronatracker.com/v3/stats/worldometer/global')
             .done(function (global) {
 
                 if (global) {
 
                     console.log(global);
 
-                    $.get(`http://api.coronatracker.com/v3/stats/worldometer/country?countryCode=${country}`)
+                    $.get(`https://api.coronatracker.com/v3/stats/worldometer/country?countryCode=${country}`)
                         .done(function (data) {
 
 
@@ -56,7 +56,7 @@ $(document).ready(function () {
         var now = moment().format('YYYY-MM-DD');
         var last7Days = moment().subtract(7, 'd').format('YYYY-MM-DD');
 
-        $.get(`http://api.coronatracker.com/v3/analytics/newcases/country?countryCode=${country}&startDate=${last7Days}&endDate=${now}`)
+        $.get(`https://api.coronatracker.com/v3/analytics/newcases/country?countryCode=${country}&startDate=${last7Days}&endDate=${now}`)
             .done(function (data) {
 
                 if (data) {
@@ -699,7 +699,7 @@ function percentage(a, b) {
 
 function getCountries() {
 
-    $.get('http://api.coronatracker.com/v2/analytics/country')
+    $.get('https://api.coronatracker.com/v2/analytics/country')
         .done(function (data) {
 
             if (data) {

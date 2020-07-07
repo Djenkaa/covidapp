@@ -1101,7 +1101,7 @@ var SalesChart = function (chartArray) {
 function dailyChart() {
 
     $.ajax({
-        url: `http://api.coronatracker.com/v3/analytics/dailyNewStats?limit=10`,
+        url: `https://api.coronatracker.com/v3/analytics/dailyNewStats?limit=10`,
         method: 'GET',
         type: 'JSON',
         success: function (data) {
@@ -1139,7 +1139,7 @@ function mostVulnerableCountries() {
 
 
     $.ajax({
-        url: `http://api.coronatracker.com/v3/stats/worldometer/global`,
+        url: `https://api.coronatracker.com/v3/stats/worldometer/global`,
         method: 'GET',
         type: 'JSON',
         success: function (global) {
@@ -1152,7 +1152,7 @@ function mostVulnerableCountries() {
                 $('#globalActive').text(numeral(global.totalActiveCases).format('0,0'));
 
                 $.ajax({
-                    url: `http://api.coronatracker.com/v3/stats/worldometer/country?limit=5`,
+                    url: `https://api.coronatracker.com/v3/stats/worldometer/country?limit=5`,
                     method: 'GET',
                     type: 'JSON',
                     success: function (data) {
