@@ -23,8 +23,6 @@
 
     <title>{{ config('app.name', 'Argon Dashboard') }} - @yield('title')</title>
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="/img/covid.png">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <!-- Icons -->
