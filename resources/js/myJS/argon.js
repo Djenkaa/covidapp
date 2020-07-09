@@ -1059,25 +1059,36 @@ var SalesChart = function (chartArray) {
                             var content = '';
 
                             if (data.datasets.length > 1) {
-                                content += '<span class="popover-body-label mr-auto">' + label + ' </span>';
+                                content += '<span class="popover-body-label mr-auto">' + label + ': ' + yLabel +' </span>';
                             }
 
-                            content += ' <span class="popover-body-value">' + yLabel + '</span>';
+                            // content += ' <span class="popover-body-value">' + yLabel + '</span>';
                             return content;
                         }
-                    }
+                    },
+
                 },
                 title: {
                     display: true,
-                    text: 'Confirmed cases in the last 24 hours'
-                }
+                    text: 'Confirmed & Deaths cases in the last 24 hours'
+                },
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                },
             },
             data: {
                 labels: chartArray.countries,
                 datasets: [{
                     label: 'Confirmed',
                     data: chartArray.cases,
-                }]
+                    backgroundColor: '#fb6340'
+                },
+                    {
+                        label: 'Deaths',
+                        data: chartArray.deaths,
+                        backgroundColor: '#f5365c'
+                    }]
             }
         });
 
@@ -1110,19 +1121,21 @@ function dailyChart() {
 
                 var countries = [];
                 var cases = [];
+                var deaths = [];
 
 
                 for (var i = 0; i < data.length; i++) {
 
                     countries.unshift(data[i].country);
                     cases.unshift(data[i].daily_cases);
+                    deaths.unshift(data[i].daily_deaths);
                 }
 
                 if (countries.length > 0 && cases.length > 0) {
 
                     $('#dailyTop10Loader').hide();
 
-                    SalesChart({countries, cases});
+                    SalesChart({countries, cases, deaths});
                 }
             }
         },
