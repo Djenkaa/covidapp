@@ -99,7 +99,7 @@
                         <div class="card-header bg-transparent">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h6 class="text-uppercase mb-1 text-light myFloatRight"><i class="far fa-clock fa-lg"></i> Updated at <span class="countryLast7Update">...</span></h6>
+                                    <h6 class="text-uppercase mb-1 text-light myFloatRight"><i class="far fa-clock fa-lg"></i> Updated <span class="countryLast7Update">...</span></h6>
                                     <h2 class="text-white mb-0">Last 7 Days</h2>
                                 </div>
                             </div>
@@ -118,7 +118,7 @@
                         <div class="card-header bg-transparent">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h6 class="text-uppercase mb-1 text-muted"><i class="far fa-clock fa-lg"></i> Updated at <span class="countryLast7Update">...</span></h6>
+                                    <h6 class="text-uppercase mb-1 text-muted"><i class="far fa-clock fa-lg"></i> Updated <span class="countryLast7Update">...</span></h6>
                                     <h2 class="mb-0">Total result in last 7 days</h2>
                                 </div>
                             </div>
@@ -329,7 +329,7 @@
                         <div class="card-header border-0">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h6 class="text-uppercase mb-1 text-muted myFloatRight"><i class="far fa-clock fa-lg"></i> Updated at <span class="globalTopUpdate">...</span></h6>
+                                    <h6 class="text-uppercase mb-1 text-muted myFloatRight"><i class="far fa-clock fa-lg"></i> Updated <span class="globalTopUpdate">...</span></h6>
                                     <h3 class="mb-0">Today statistics</h3>
                                 </div>
 
@@ -373,7 +373,7 @@
                         <div class="card-header border-0">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h6 class="text-uppercase mb-1 text-muted myFloatRight"><i class="far fa-clock fa-lg"></i> Updated at <span class="globalTopUpdate">...</span></h6>
+                                    <h6 class="text-uppercase mb-1 text-muted myFloatRight"><i class="far fa-clock fa-lg"></i> Updated <span class="globalTopUpdate">...</span></h6>
 
                                     <h3 class="mb-0">Confirmed</h3>
                                 </div>

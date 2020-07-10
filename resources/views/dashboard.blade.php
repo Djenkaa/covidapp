@@ -14,7 +14,7 @@
                     <div class="card-header bg-transparent">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h6 class="text-uppercase text-light mb-1 myFloatRight"><i class="far fa-clock fa-lg"></i> Updated at <span class="globalChartUpdate">...</span></h6>
+                                <h6 class="text-uppercase text-light mb-1 myFloatRight"><i class="far fa-clock fa-lg"></i> Updated <span class="globalChartUpdate">...</span></h6>
                                 <h2 class="text-white mb-0">Daily Cases </h2>
                             </div>
 
@@ -40,7 +40,7 @@
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h6 class="text-uppercase mb-1 text-muted myFloatRight"><i class="far fa-clock fa-lg"></i> Updated at <span class="globalTopUpdate">...</span></h6>
+                                <h6 class="text-uppercase mb-1 text-muted myFloatRight"><i class="far fa-clock fa-lg"></i> Updated <span class="globalTopUpdate">...</span></h6>
                                 <h3 class="mb-0">The most vulnerable countries</h3>
                             </div>
 
@@ -71,7 +71,7 @@
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h6 class="text-uppercase mb-1 text-muted"><i class="far fa-clock fa-lg"></i> Updated at <span class="globalTopUpdate">...</span></h6>
+                                <h6 class="text-uppercase mb-1 text-muted"><i class="far fa-clock fa-lg"></i> Updated <span class="globalTopUpdate">...</span></h6>
                                 <h3 class="mb-0">Top 5 countries by confirmed cases</h3>
                             </div>
                         </div>
