@@ -1134,6 +1134,7 @@ function dailyChart() {
                 if (countries.length > 0 && cases.length > 0) {
 
                     $('#dailyTop10Loader').hide();
+                    $('.globalChartUpdate').text(moment(data[0].last_updated).format('HH:mm'));
 
                     SalesChart({countries, cases, deaths});
                 }
@@ -1160,7 +1161,7 @@ function mostVulnerableCountries() {
 
             if (global) {
 
-
+                $('.globalTotalUpdate').text(moment(global.created).format('HH:mm'));
                 $('#globalConfirmed').text(numeral(global.totalConfirmed).format('0,0'));
                 $('#globalDeaths').text(numeral(global.totalDeaths).format('0,0'));
                 $('#globalRecovered').text(numeral(global.totalRecovered).format('0,0'));
@@ -1173,6 +1174,8 @@ function mostVulnerableCountries() {
                     success: function (data) {
 
                         if (data) {
+
+                            $('.globalTopUpdate').text(moment(data[0].lastUpdated).format('HH:mm'));
 
                             $('#mostVulnerableCountriesLoader').hide();
                             mostVulnerableCountriesTemplate(data);

@@ -24,7 +24,6 @@ $(document).ready(function () {
                     $.get(`https://api.coronatracker.com/v3/stats/worldometer/country?countryCode=${country}`)
                         .done(function (data) {
 
-
                             if (data) {
 
                                 $('.countryStatsLoader').hide();
@@ -62,6 +61,7 @@ $(document).ready(function () {
 
                     $('.countryStatsLoader').hide();
                     $('.countries').show();
+                    $('.countryLast7Update').text(moment(_.last(data).last_updated).format('DD.MMM'));
 
                     displayLast7DaysChart(data);
 

@@ -164,7 +164,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">
                         <i class="fas fa-sync-alt fa-lg"></i>
-                        <span style="font-size: 13px;">The data is refreshed every 10 minutes</span>
+                        <span style="font-size: 13px;">The data is refreshed every 20 minutes</span>
                     </a>
                 </li>
 
