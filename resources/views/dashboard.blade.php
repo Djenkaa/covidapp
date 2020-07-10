@@ -14,7 +14,7 @@
                     <div class="card-header bg-transparent">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h6 class="text-uppercase text-light ls-1 mb-1">Overview</h6>
+                                <h6 class="text-uppercase text-light mb-1 myFloatRight"><i class="far fa-clock fa-lg"></i> Updated at <span class="globalChartUpdate">...</span></h6>
                                 <h2 class="text-white mb-0">Daily Cases </h2>
                             </div>
 
@@ -40,6 +40,7 @@
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col">
+                                <h6 class="text-uppercase mb-1 text-muted myFloatRight"><i class="far fa-clock fa-lg"></i> Updated at <span class="globalTopUpdate">...</span></h6>
                                 <h3 class="mb-0">The most vulnerable countries</h3>
                             </div>
 
@@ -57,23 +58,8 @@
                                 </tr>
                             </thead>
                             <tbody id="mostVulnerableCountries">
+
                                 <div id="mostVulnerableCountriesLoader" class="loader" style="color: #5e72e4"></div>
-{{--                            @foreach($top5Confirmed as $country)--}}
-{{--                                <tr>--}}
-{{--                                    <th scope="row">--}}
-{{--                                        {{$country['country']}}--}}
-{{--                                    </th>--}}
-{{--                                    <td>--}}
-{{--                                        {{number_format($country['confirmed'])}}--}}
-{{--                                    </td>--}}
-{{--                                    <td>--}}
-{{--                                        <i class="text-danger fas fa-arrow-down"></i> {{number_format($country['deaths'])}}--}}
-{{--                                    </td>--}}
-{{--                                    <td>--}}
-{{--                                        <i class="fas fa-arrow-up text-success mr-3"></i> {{number_format($country['recovered'])}}--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                @endforeach--}}
 
                             </tbody>
                         </table>
@@ -85,11 +71,9 @@
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col">
+                                <h6 class="text-uppercase mb-1 text-muted"><i class="far fa-clock fa-lg"></i> Updated at <span class="globalTopUpdate">...</span></h6>
                                 <h3 class="mb-0">Top 5 countries by confirmed cases</h3>
                             </div>
-{{--                            <div class="col text-right">--}}
-{{--                                <a href="#!" class="btn btn-sm btn-primary">See all</a>--}}
-{{--                            </div>--}}
                         </div>
                     </div>
                     <div class="table-responsive">
@@ -105,30 +89,6 @@
                             <tbody id="top5Confirmed">
 
                             <div class="loader" id="top5ConfirmedLoader" style="color: #5e72e4"></div>
-
-{{--                            @foreach($top5Confirmed as $top)--}}
-{{--                                <tr>--}}
-{{--                                    <th scope="row">--}}
-{{--                                        {{$top['country']}}--}}
-{{--                                    </th>--}}
-{{--                                    <td>--}}
-{{--                                        {{number_format($top['confirmed'])}}--}}
-{{--                                    </td>--}}
-{{--                                    <td>--}}
-{{--                                        @php--}}
-{{--                                        $bar = (int)$top['confirmed'] / (int)$worldTotal['totalConfirmed'] * 100;--}}
-{{--                                        @endphp--}}
-{{--                                        <div class="d-flex align-items-center">--}}
-{{--                                            <span class="mr-2">{{number_format($bar,2)}}%</span>--}}
-{{--                                            <div>--}}
-{{--                                                <div class="progress">--}}
-{{--                                                <div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="{{$bar}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$bar}}%;"></div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                @endforeach--}}
 
                             </tbody>
                         </table>
