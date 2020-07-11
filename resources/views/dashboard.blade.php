@@ -14,8 +14,9 @@
                     <div class="card-header bg-transparent">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h6 class="text-uppercase text-light mb-1 myFloatRight"><i class="far fa-clock fa-lg"></i> Updated <span class="globalChartUpdate">...</span></h6>
-                                <h2 class="text-white mb-0">Daily Cases </h2>
+                                <h6 class="text-uppercase text-light mb-1 myFloatRight"><i class="far fa-clock fa-lg"></i>
+                                    {{__('appTerms.updated')}} <span class="globalChartUpdate">...</span></h6>
+                                <h2 class="text-white mb-0">{{__('global.dailyCases')}} </h2>
                             </div>
 
                         </div>
@@ -25,7 +26,10 @@
                         <!-- Chart -->
 
                         <div class="chart">
-                            <div id="dailyTop10Loader" class="loader"></div>
+                            <div id="dailyTop10Loader" data-text="{{__('global.chartText')}}" class="loader"
+                                 data-confirmed="{{__('appTerms.confirmed')}}"
+                                 data-deaths="{{__('appTerms.deaths')}}"
+                            ></div>
                             <!-- Chart wrapper -->
                             <canvas id="chart-sales" class="chart-canvas"></canvas>
                         </div>
@@ -40,8 +44,9 @@
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h6 class="text-uppercase mb-1 text-muted myFloatRight"><i class="far fa-clock fa-lg"></i> Updated <span class="globalTopUpdate">...</span></h6>
-                                <h3 class="mb-0">The most vulnerable countries</h3>
+                                <h6 class="text-uppercase mb-1 text-muted myFloatRight"><i class="far fa-clock fa-lg"></i>
+                                    {{__('appTerms.updated')}} <span class="globalTopUpdate">...</span></h6>
+                                <h3 class="mb-0">{{__('global.mostVulnerable')}}</h3>
                             </div>
 
                         </div>
@@ -51,10 +56,10 @@
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">Country</th>
-                                    <th scope="col">Confirmed</th>
-                                    <th scope="col">Deaths</th>
-                                    <th scope="col">Recovered</th>
+                                    <th scope="col">{{__('appTerms.country')}}</th>
+                                    <th scope="col">{{__('appTerms.confirmed')}}</th>
+                                    <th scope="col">{{__('appTerms.deaths')}}</th>
+                                    <th scope="col">{{__('appTerms.recovered')}}</th>
                                 </tr>
                             </thead>
                             <tbody id="mostVulnerableCountries">
@@ -71,8 +76,8 @@
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h6 class="text-uppercase mb-1 text-muted"><i class="far fa-clock fa-lg"></i> Updated <span class="globalTopUpdate">...</span></h6>
-                                <h3 class="mb-0">Top 5 countries by confirmed cases</h3>
+                                <h6 class="text-uppercase mb-1 text-muted"><i class="far fa-clock fa-lg"></i> {{__('appTerms.updated')}} <span class="globalTopUpdate">...</span></h6>
+                                <h3 class="mb-0">{{__('global.top5Confirmed')}}</h3>
                             </div>
                         </div>
                     </div>
@@ -81,9 +86,9 @@
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">Country</th>
-                                    <th scope="col">Confirmed</th>
-                                    <th scope="col">of the Total</th>
+                                    <th scope="col">{{__('appTerms.country')}}</th>
+                                    <th scope="col">{{__('appTerms.confirmed')}}</th>
+                                    <th scope="col">{{__('global.ofTotal')}}</th>
                                 </tr>
                             </thead>
                             <tbody id="top5Confirmed">

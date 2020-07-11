@@ -2,7 +2,7 @@
 <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
     <div class="container-fluid">
         <!-- Brand -->
-        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="{{ route('home') }}"><i class="fas fa-chart-line fa-lg"></i> COVID-19 statistics </a>
+        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="{{ route('home') }}"><i class="fas fa-chart-line fa-lg"></i> {{__('appTerms.covidStats')}} </a>
         <!-- User -->
         <ul class="navbar-nav align-items-center d-none d-md-flex">
             <li class="nav-item dropdown">
@@ -18,13 +18,13 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
                     <div class=" dropdown-header noti-title">
-                        <h6 class="text-overflow m-0">Languages</h6>
+                        <h6 class="text-overflow m-0">{{__('appTerms.languages')}}</h6>
                     </div>
-                    <a href="#" class="dropdown-item">
+                    <a hreflang="en" href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}" class="dropdown-item">
                         <img src="https://www.countryflags.io/gb/shiny/24.png">
                         <span> English</span>
                     </a>
-                    <a href="#" class="dropdown-item">
+                    <a hreflang="sr" href="{{ LaravelLocalization::getLocalizedURL('sr', null, [], true) }}" class="dropdown-item">
                         <img src="https://www.countryflags.io/rs/shiny/24.png">
                         <span> Serbian</span>
                     </a>
@@ -33,3 +33,5 @@
         </ul>
     </div>
 </nav>
+
+

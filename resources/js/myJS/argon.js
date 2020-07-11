@@ -1026,7 +1026,9 @@ var SalesChart = function (chartArray) {
 
     // Variables
     var $chart = $('#chart-sales');
-
+    var text = $('#dailyTop10Loader').data('text');
+    var confirmedText = $('#dailyTop10Loader').data('confirmed');
+    var deathsText = $('#dailyTop10Loader').data('deaths');
 
     // Methods
 
@@ -1070,7 +1072,7 @@ var SalesChart = function (chartArray) {
                 },
                 title: {
                     display: true,
-                    text: 'Confirmed & Deaths cases in the last 24 hours'
+                    text: text
                 },
                 legend: {
                     display: true,
@@ -1080,12 +1082,12 @@ var SalesChart = function (chartArray) {
             data: {
                 labels: chartArray.countries,
                 datasets: [{
-                    label: 'Confirmed',
+                    label: confirmedText,
                     data: chartArray.cases,
                     backgroundColor: '#fb6340'
                 },
                     {
-                        label: 'Deaths',
+                        label: deathsText,
                         data: chartArray.deaths,
                         backgroundColor: '#f5365c'
                     }]
@@ -1118,6 +1120,10 @@ function dailyChart() {
         success: function (data) {
 
             if (data) {
+
+                if(typeof data == 'string'){
+                    data = JSON.parse(data);
+                }
 
                 var countries = [];
                 var cases = [];
@@ -1161,6 +1167,10 @@ function mostVulnerableCountries() {
 
             if (global) {
 
+                if(typeof global == 'string'){
+
+                    global = JSON.parse(global);
+                }
                 $('.globalTotalUpdate').text(moment(global.created).format('HH:mm'));
                 $('#globalConfirmed').text(numeral(global.totalConfirmed).format('0,0'));
                 $('#globalDeaths').text(numeral(global.totalDeaths).format('0,0'));
@@ -1175,6 +1185,10 @@ function mostVulnerableCountries() {
 
                         if (data) {
 
+                            if(typeof data == 'string'){
+
+                                data = JSON.parse(data);
+                            }
                             $('.globalTopUpdate').text(moment(data[0].lastUpdated).format('HH:mm'));
 
                             $('#mostVulnerableCountriesLoader').hide();

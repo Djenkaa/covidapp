@@ -20,12 +20,19 @@ $(document).ready(function () {
 
                 if (global) {
 
+                    if(typeof global == 'string'){
 
+                        global = JSON.parse(global);
+                    }
                     $.get(`https://api.coronatracker.com/v3/stats/worldometer/country?countryCode=${country}`)
                         .done(function (data) {
 
                             if (data) {
 
+                                if(typeof data == 'string'){
+
+                                    data = JSON.parse(data);
+                                }
                                 $('.countryStatsLoader').hide();
                                 $('.countries').show();
                                 countryStats(data[0], global);
@@ -59,6 +66,10 @@ $(document).ready(function () {
 
                 if (data) {
 
+                    if(typeof data == 'string'){
+
+                        data = JSON.parse(data);
+                    }
                     $('.countryStatsLoader').hide();
                     $('.countries').show();
                     $('.countryLast7Update').text(moment(_.last(data).last_updated).format('DD.MMM'));
@@ -576,6 +587,10 @@ var countryChart = function (stats) {
     // Variables
 
     var $chart = $('#daily');
+    var text = $('#dailyByDate').data('text');
+    var confirmedText = $('#dailyByDate').data('confirmed');
+    var deathsText = $('#dailyByDate').data('deaths');
+    var recoveredText = $('#dailyByDate').data('recovered');
 
     // Methods
 
@@ -617,7 +632,7 @@ var countryChart = function (stats) {
                 },
                 title: {
                     display: true,
-                    text: 'Confirmed, Deaths and Recovered in the last 7 days'
+                    text: text
                 },
                 legend: {
                     display: true,
@@ -627,17 +642,17 @@ var countryChart = function (stats) {
             data: {
                 labels: stats.days,
                 datasets: [{
-                    label: 'Confirmed',
+                    label: confirmedText,
                     data: stats.confirmedByDate,
                     backgroundColor: '#fb6340'
                 },
                     {
-                        label: 'Deaths',
+                        label: deathsText,
                         data: stats.deathsByDate,
                         backgroundColor: '#f5365c'
                     },
                     {
-                        label: 'Recovered',
+                        label: recoveredText,
                         data: stats.recoveredByDate,
                         backgroundColor: '#2dce89'
                     }

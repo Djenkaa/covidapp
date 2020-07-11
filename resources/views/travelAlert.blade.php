@@ -15,7 +15,7 @@
         @include('layouts.headers.guest',['text'=>$data['countryName'],'icon'=>'far fa-newspaper'])
 
     @else
-        @include('layouts.headers.guest',['text'=>'Select your country and get news about travel','icon'=>'far fa-newspaper'])
+        @include('layouts.headers.guest',['text'=>__('travelAlert.text'),'icon'=>'far fa-newspaper'])
     @endif
 
 
@@ -30,7 +30,7 @@
                             <form action="{{route('travel.news')}}" method="POST">
                                 @csrf
 
-                                <label for="">Select Country</label><br>
+                                <label for="">{{__('country.selectCountry')}}</label><br>
                                 <select class="form-control" name="selectCountry" id="">
                                     @foreach($countriesList as $country)
 
@@ -45,7 +45,7 @@
                                         @endif
                                     @endforeach
                                 </select><br>
-                                <button type="submit" class="btn btn-primary">Show</button>
+                                <button type="submit" class="btn btn-primary">{{__('buttons.show')}}</button>
 
                             </form>
 

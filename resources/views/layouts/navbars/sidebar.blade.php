@@ -20,13 +20,13 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
                     <div class=" dropdown-header noti-title">
-                        <h6 class="text-overflow m-0">Languages</h6>
+                        <h6 class="text-overflow m-0">{{__('appTerms.languages')}}</h6>
                     </div>
-                    <a href="#" class="dropdown-item">
+                    <a hreflang="en" href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}" class="dropdown-item">
                         <img src="https://www.countryflags.io/gb/shiny/24.png">
                         <span> English</span>
                     </a>
-                    <a href="#" class="dropdown-item">
+                    <a hreflang="sr" href="{{ LaravelLocalization::getLocalizedURL('sr', null, [], true) }}" class="dropdown-item">
                         <img src="https://www.countryflags.io/rs/shiny/24.png">
                         <span> Serbian</span>
                     </a>
@@ -67,18 +67,18 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('home') }}">
-                        <i class="fas fa-globe-americas text-primary"></i> Global
+                        <i class="fas fa-globe-americas text-primary"></i> {{__('appTerms.global')}}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('country') }}">
-                        <i class="fas fa-flag text-primary"></i> Country
+                        <i class="fas fa-flag text-primary"></i> {{__('appTerms.country')}}
 
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('travel') }}">
-                        <i class="fas fa-plane-departure text-primary"></i> Travel Alert
+                        <i class="fas fa-plane-departure text-primary"></i> {{__('sidebar.travelAlert')}}
                     </a>
                 </li>
             </ul>
@@ -89,7 +89,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('support')}}">
-                        <button class="btn btn-primary"><i class="fab fa-paypal"></i> Support Us</button>
+                        <button class="btn btn-primary"><i class="fab fa-paypal"></i> {{__('sidebar.supportUs')}}</button>
                     </a>
                 </li>
 
@@ -101,7 +101,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">
                         <i class="fas fa-sync-alt fa-lg"></i>
-                        <span style="font-size: 13px;">The data is refreshed every 20 minutes</span>
+                        <span style="font-size: 13px;">{{__('sidebar.refreshData')}}</span>
                     </a>
                 </li>
 
