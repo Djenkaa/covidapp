@@ -64,9 +64,9 @@
                     this.loader = true;
                     var vm = this;
 
-                    const translate = setCORS("http://cors-anywhere.herokuapp.com/");
+                    const translate = setCORS("https://cors-anywhere.herokuapp.com/");
 
-                    axios.get('http://api.coronatracker.com/v1/travel-alert')
+                    axios.get('https://api.coronatracker.com/v1/travel-alert')
                         .then(data=>{
 
                             var alerts = [];
