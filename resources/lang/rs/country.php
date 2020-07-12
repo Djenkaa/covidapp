@@ -7,5 +7,5 @@ return [
     'worldTotal'=>'svetske populacije',
     'todayStats'=>'Današnja statistika',
     'ConfirmedPerMill'=>'Obolelo po milionu',
-    'charText'=>'Obolelih, Umrlih i Izlečenih u poslednjih 7 dana',
+    'charText'=>'Obolelih, Preminulih i Izlečenih u poslednjih 7 dana',
 ];
