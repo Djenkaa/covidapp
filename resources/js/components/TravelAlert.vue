@@ -3,6 +3,8 @@
 </template>
 
 <script>
+    import { setCORS } from "google-translate-api-browser";
+
     export default {
         name: "TravelAlert",
 
@@ -10,35 +12,59 @@
 
             return{
                 countries:[],
-                countrySelected: '',
+                countrySelected: 'AF',
                 countryAlert:'',
-                loader:true
+                loader:false,
+                allCountries: JSON.parse(this.allcountries)
             }
         },
 
+        props:['locale','allcountries'],
+
+
         methods:{
 
-            getCountries(){
+            languages(locale){
 
-                axios.get('http://api.coronatracker.com/v2/analytics/country')
-                    .then(data=>{
-                    console.log(data.data);
-                        if(data.data.length > 0){
+                var lang = '';
 
-                            this.countries = data.data;
-                            this.countrySelected = data.data[0].countryCode;
-                            this.loader = false;
-                        }
+                switch (locale) {
 
-                    }).catch(e=>{
-                    console.log(e);
-                });
+                    case 'gb':
+                        lang = 'en';
+                        break;
+                    case 'rs':
+                        lang = 'bs';
+                        break
+                }
+                return lang;
             },
+
+
+            // getCountries(){
+            //
+            //     axios.get('http://api.coronatracker.com/v2/analytics/country')
+            //         .then(data=>{
+            //
+            //             if(data.data.length > 0){
+            //
+            //                 this.countries = data.data;
+            //                 this.countrySelected = data.data[0].countryCode;
+            //                 this.loader = false;
+            //             }
+            //
+            //         }).catch(e=>{
+            //         console.log(e);
+            //     });
+            // },
 
             getTravelAlert(){
 
                     var country = this.countrySelected;
                     this.loader = true;
+                    var vm = this;
+
+                    const translate = setCORS("http://cors-anywhere.herokuapp.com/");
 
                     axios.get('http://api.coronatracker.com/v1/travel-alert')
                         .then(data=>{
@@ -55,10 +81,25 @@
 
                                 if(search){
 
+                                    var appLocale = vm.languages(this.locale);
+
                                     this.countryAlert = search;
-                                    this.countryAlert.publishedDate = moment(this.countryAlert.publishedDate).format('DD.MMM.YYYY');
+                                    this.countryAlert.publishedDate = moment(this.countryAlert.publishedDate).locale(appLocale).format('DD.MMM.YYYY');
+                                    this.countryAlert.countryName = this.allCountries[country];
+
+                                    translate(this.countryAlert.alertMessage, { to: appLocale })
+                                        .then(res => {
+                                            if(res.text){
+
+                                                this.countryAlert.alertMessage = res.text;
+                                            }
+                                        })
+                                        .catch(err => {
+                                            console.error(err);
+                                        });
                                 }
                                 this.loader = false;
+
                                 $('html, body').animate({
                                     scrollTop: 600
                                 }, 500, 'swing');
@@ -68,14 +109,14 @@
                    console.log(e);
                 });
             }
-
         },
 
 
         created() {
 
-            this.getCountries();
+            // this.getCountries();
 
+            // console.log(this.allCountries);
         }
     }
 

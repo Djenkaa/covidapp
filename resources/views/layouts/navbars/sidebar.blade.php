@@ -21,8 +21,9 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
                     <div class=" dropdown-header noti-title">
-                        <h6 class="text-overflow m-0">{{__('appTerms.languages')}}</h6>
+                        <h6 class="text-overflow m-0"><i class="fas fa-globe fa-lg"></i> {{__('appTerms.languages')}}</h6>
                     </div>
+                    <div class="dropdown-divider"></div>
                     <a hreflang="gb" href="{{ LaravelLocalization::getLocalizedURL('gb', null, [], true) }}" class="dropdown-item">
                         <img src="https://www.countryflags.io/gb/shiny/24.png">
                         <span> {{__('languages.en')}}</span>

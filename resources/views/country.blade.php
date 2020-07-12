@@ -44,7 +44,7 @@
                                             <div class="loader countriesLoader" style="color: #5e72e4;"></div>
                                             <div class="loader countryStatsLoader" style="color: #5e72e4;display: none;"></div>
 
-                                                <div class="countries" style="display: none;">
+                                                <div id="countries" data-countries="{{json_encode(__('countries.countries'))}}" class="countries" style="display: none;">
 
                                                 <label for="">{{__('country.selectCountry')}}</label><br>
                                                 <select class="form-control" name="selectCountry" id="">

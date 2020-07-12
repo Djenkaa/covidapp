@@ -712,15 +712,23 @@ function percentage(a, b) {
 
 function getCountries() {
 
-    $.get('https://api.coronatracker.com/v2/analytics/country')
-        .done(function (data) {
+    // $.get('https://api.coronatracker.com/v2/analytics/country')
+    //     .done(function (data) {
+    //
+    //         if (data) {
+    //
+    //             $('.countriesLoader').hide();
+    //             countriesTemplate(_.sortBy(data, 'countryName'));
+    //         }
+    //     });
 
-            if (data) {
+    var countries = $('#countries').data('countries');
 
-                $('.countriesLoader').hide();
-                countriesTemplate(_.sortBy(data, 'countryName'));
-            }
-        });
+    if(countries){
+
+        countriesTemplate(countries);
+        $('.countriesLoader').hide();
+    }
 }
 
 
@@ -728,9 +736,9 @@ function countriesTemplate(data) {
 
     var temp = ``;
 
-    for (var i = 0; i < data.length; i++) {
+    for(const [key,value] of Object.entries(data)){
 
-        temp += `<option value="${data[i].countryCode}">${data[i].countryName}</option>`;
+        temp += `<option value="${key}">${value}</option>`;
     }
 
     $('select[name="selectCountry"]').html(temp);

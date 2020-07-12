@@ -6,21 +6,15 @@
 
 @section('content')
 
-    @php
-        $data = session()->get('countryTravel');
-
-    @endphp
-
-    @if($data)
-        @include('layouts.headers.guest',['text'=>$data['countryName'],'icon'=>'far fa-newspaper'])
-
-    @else
         @include('layouts.headers.guest',['text'=>__('travelAlert.text'),'icon'=>'far fa-newspaper'])
-    @endif
 
 
 
-    <travel-alert inline-template>
+
+    <travel-alert
+        locale="{{app()->getLocale()}}"
+        allcountries="{{json_encode(__('countries.countries'))}}"
+        inline-template>
 
         <div class="container mt--8 pb-5" v-cloak>
             <div class="row justify-content-center">
@@ -36,8 +30,8 @@
                                 <label>{{__('country.selectCountry')}}</label><br>
                                 <select class="form-control" name="travelAlert" v-model="countrySelected">
 
-                                    <option v-for="country in countries" :value="country.countryCode">
-                                        @{{ country.countryName }}
+                                    <option v-for="(country,code) in allCountries" :value="code">
+                                        @{{ country }}
                                     </option>
 
                                 </select><br>
