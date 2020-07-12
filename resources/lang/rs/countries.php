@@ -226,7 +226,7 @@ return [
         "VG" => "Devičanska ostrva, Britanija",
         "VI" => "Devičanska ostrva, USA",
         "WF" => "Vallis i Futuna",
-        "EH" => "zapadna Sahara",
+        "EH" => "Zapadna Sahara",
         "YE" => "Jemen",
         "ZM" => "Zambija",
         "ZW" => "Zimbabve"
