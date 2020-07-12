@@ -217,7 +217,7 @@ return [
         "UA" => "Ukrajna",
         "AE" => "Ujedinjeni arapski Emirati",
         "GB" => "Velika Britanija",
-        "US" => "Sjedinjene Američke Države",
+        "US" => "SAD",
         "UY" => "Urugvaj",
         "UZ" => "Uzbekistan",
         "VU" => "Vanuatu",
