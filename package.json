@@ -22,5 +22,10 @@
         "sass-loader": "^8.0.0",
         "vue": "^2.5.17",
         "vue-template-compiler": "^2.6.10"
+    },
+    "dependencies": {
+        "@google-cloud/translate": "^6.0.1",
+        "@vitalets/google-translate-api": "^3.0.0",
+        "google-translate-api-browser": "^1.1.71"
     }
 }

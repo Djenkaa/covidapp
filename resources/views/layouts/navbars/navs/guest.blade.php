@@ -26,32 +26,56 @@
 {{--                </div>--}}
 {{--            </div>--}}
 {{--            <!-- Navbar items -->--}}
-{{--            <ul class="navbar-nav ml-auto">--}}
+            <ul class="navbar-nav ml-auto">
 {{--                <li class="nav-item">--}}
 {{--                    <a class="nav-link nav-link-icon" href="{{ route('home') }}">--}}
 {{--                        <span class="nav-link-inner--text" style="font-size: 13px;">Data refresh in every 10 minutes</span>--}}
 {{--                    </a>--}}
 {{--                </li>--}}
-{{--      --}}
+
 {{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link nav-link-icon" href="{{ route('register') }}">--}}
+{{--                    <a class="nav-link nav-link-icon" href="#">--}}
 {{--                        <i class="ni ni-circle-08"></i>--}}
 {{--                        <span class="nav-link-inner--text">{{ __('Register') }}</span>--}}
 {{--                    </a>--}}
 {{--                </li>--}}
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link nav-link-icon" href="{{ route('login') }}">--}}
-{{--                        <i class="ni ni-key-25"></i>--}}
-{{--                        <span class="nav-link-inner--text">{{ __('Login') }}</span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link nav-link-icon" href="{{ route('profile.edit') }}">--}}
-{{--                        <i class="ni ni-single-02"></i>--}}
-{{--                        <span class="nav-link-inner--text">{{ __('Profile') }}</span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--            </ul>--}}
+
+
+
+            </ul>
 {{--        </div>--}}
     </div>
 </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{--<li class="nav-item dropdown">--}}
+{{--    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+{{--        <span class="badge badge-light"> <img src="https://www.countryflags.io/gb/shiny/32.png"></span>--}}
+{{--    </a>--}}
+{{--    <div class="dropdown-menu" aria-labelledby="navbarDropdown">--}}
+{{--        <a class="dropdown-item" href="#"><img src="https://www.countryflags.io/gb/shiny/24.png"> English</a>--}}
+{{--        <a class="dropdown-item" href="#"><img src="https://www.countryflags.io/rs/shiny/24.png"> Serbian</a>--}}
+{{--    </div>--}}
+{{--</li>--}}

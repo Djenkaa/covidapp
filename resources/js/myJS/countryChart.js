@@ -20,12 +20,19 @@ $(document).ready(function () {
 
                 if (global) {
 
+                    if(typeof global == 'string'){
 
+                        global = JSON.parse(global);
+                    }
                     $.get(`https://api.coronatracker.com/v3/stats/worldometer/country?countryCode=${country}`)
                         .done(function (data) {
 
                             if (data) {
 
+                                if(typeof data == 'string'){
+
+                                    data = JSON.parse(data);
+                                }
                                 $('.countryStatsLoader').hide();
                                 $('.countries').show();
                                 countryStats(data[0], global);
@@ -59,6 +66,10 @@ $(document).ready(function () {
 
                 if (data) {
 
+                    if(typeof data == 'string'){
+
+                        data = JSON.parse(data);
+                    }
                     $('.countryStatsLoader').hide();
                     $('.countries').show();
                     $('.countryLast7Update').text(moment(_.last(data).last_updated).format('DD.MMM'));
@@ -576,6 +587,10 @@ var countryChart = function (stats) {
     // Variables
 
     var $chart = $('#daily');
+    var text = $('#dailyByDate').data('text');
+    var confirmedText = $('#dailyByDate').data('confirmed');
+    var deathsText = $('#dailyByDate').data('deaths');
+    var recoveredText = $('#dailyByDate').data('recovered');
 
     // Methods
 
@@ -617,7 +632,7 @@ var countryChart = function (stats) {
                 },
                 title: {
                     display: true,
-                    text: 'Confirmed, Deaths and Recovered in the last 7 days'
+                    text: text
                 },
                 legend: {
                     display: true,
@@ -627,17 +642,17 @@ var countryChart = function (stats) {
             data: {
                 labels: stats.days,
                 datasets: [{
-                    label: 'Confirmed',
+                    label: confirmedText,
                     data: stats.confirmedByDate,
                     backgroundColor: '#fb6340'
                 },
                     {
-                        label: 'Deaths',
+                        label: deathsText,
                         data: stats.deathsByDate,
                         backgroundColor: '#f5365c'
                     },
                     {
-                        label: 'Recovered',
+                        label: recoveredText,
                         data: stats.recoveredByDate,
                         backgroundColor: '#2dce89'
                     }
@@ -697,15 +712,23 @@ function percentage(a, b) {
 
 function getCountries() {
 
-    $.get('https://api.coronatracker.com/v2/analytics/country')
-        .done(function (data) {
+    // $.get('https://api.coronatracker.com/v2/analytics/country')
+    //     .done(function (data) {
+    //
+    //         if (data) {
+    //
+    //             $('.countriesLoader').hide();
+    //             countriesTemplate(_.sortBy(data, 'countryName'));
+    //         }
+    //     });
 
-            if (data) {
+    var countries = $('#countries').data('countries');
 
-                $('.countriesLoader').hide();
-                countriesTemplate(_.sortBy(data, 'countryName'));
-            }
-        });
+    if(countries){
+
+        countriesTemplate(countries);
+        $('.countriesLoader').hide();
+    }
 }
 
 
@@ -713,9 +736,9 @@ function countriesTemplate(data) {
 
     var temp = ``;
 
-    for (var i = 0; i < data.length; i++) {
+    for(const [key,value] of Object.entries(data)){
 
-        temp += `<option value="${data[i].countryCode}">${data[i].countryName}</option>`;
+        temp += `<option value="${key}">${value}</option>`;
     }
 
     $('select[name="selectCountry"]').html(temp);

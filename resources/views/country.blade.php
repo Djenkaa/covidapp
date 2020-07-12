@@ -7,7 +7,7 @@
 
 @section('content')
 
-        @include('layouts.headers.guest',['text'=>'Select your country and get statistics about virus','icon'=>'fas fa-flag'])
+        @include('layouts.headers.guest',['text'=>__('country.selectCountryText'),'icon'=>'fas fa-flag'])
 
 
     <div class="container mt--8 pb-5">
@@ -26,12 +26,12 @@
                                         <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-icons-text-1-tab"
                                            data-toggle="tab" href="#tabs-icons-text-1" role="tab"
                                            aria-controls="tabs-icons-text-1" aria-selected="true"><i
-                                                class="fas fa-chart-area"></i> General</a>
+                                                class="fas fa-chart-area"></i> {{__('appTerms.general')}}</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-2-tab" data-toggle="tab"
                                            href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-2"
-                                           aria-selected="false"><i class="fas fa-calendar-alt"></i> Last 7 days</a>
+                                           aria-selected="false"><i class="fas fa-calendar-alt"></i> {{__('appTerms.last7Days')}}</a>
                                     </li>
                                 </ul>
                             </div>
@@ -44,13 +44,13 @@
                                             <div class="loader countriesLoader" style="color: #5e72e4;"></div>
                                             <div class="loader countryStatsLoader" style="color: #5e72e4;display: none;"></div>
 
-                                                <div class="countries" style="display: none;">
+                                                <div id="countries" data-countries="{{json_encode(__('countries.countries'))}}" class="countries" style="display: none;">
 
-                                                <label for="">Select Country</label><br>
+                                                <label for="">{{__('country.selectCountry')}}</label><br>
                                                 <select class="form-control" name="selectCountry" id="">
 
                                                 </select><br>
-                                                <button id="showGeneral" class="btn btn-primary">Show general</button>
+                                                <button id="showGeneral" class="btn btn-primary">{{__('buttons.showGeneral')}}</button>
 
                                                 </div>
 
@@ -64,12 +64,12 @@
 
                                             <div class="countries" style="display: none;">
 
-                                            <label for="">Select Country</label><br>
+                                            <label for="">{{__('country.selectCountry')}}</label><br>
 
                                                 <select class="form-control" name="countryByDate" id="">
 
                                                 </select><br>
-                                                <button id="showLast7Days" class="btn btn-primary">Show last 7 days</button>
+                                                <button id="showLast7Days" class="btn btn-primary">{{__('buttons.showLast7')}}</button>
 
                                             </div>
 
@@ -99,14 +99,19 @@
                         <div class="card-header bg-transparent">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h6 class="text-uppercase mb-1 text-light myFloatRight"><i class="far fa-clock fa-lg"></i> Updated <span class="countryLast7Update">...</span></h6>
-                                    <h2 class="text-white mb-0">Last 7 Days</h2>
+                                    <h6 class="text-uppercase mb-1 text-light myFloatRight"><i class="far fa-clock fa-lg"></i> {{__('appTerms.updated')}} <span class="countryLast7Update">...</span></h6>
+                                    <h2 class="text-white mb-0">{{__('appTerms.last7Days')}}</h2>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
                             <!-- Chart -->
-                            <div class="chart" id="dailyByDate">
+                            <div class="chart" id="dailyByDate"
+                                 data-text="{{__('country.charText')}}"
+                                 data-confirmed="{{__('appTerms.confirmed')}}"
+                                 data-deaths="{{__('appTerms.deaths')}}"
+                                 data-recovered="{{__('appTerms.recovered')}}"
+                            >
                                 <!-- Chart wrapper -->
                                 <canvas id="daily" class="chart-canvas"></canvas>
                             </div>
@@ -118,8 +123,9 @@
                         <div class="card-header bg-transparent">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h6 class="text-uppercase mb-1 text-muted"><i class="far fa-clock fa-lg"></i> Updated <span class="countryLast7Update">...</span></h6>
-                                    <h2 class="mb-0">Total result in last 7 days</h2>
+                                    <h6 class="text-uppercase mb-1 text-muted"><i class="far fa-clock fa-lg"></i>
+                                        {{__('appTerms.updated')}} <span class="countryLast7Update">...</span></h6>
+                                    <h2 class="mb-0">{{__('country.countryIn7Days')}}</h2>
                                 </div>
                             </div>
                         </div>
@@ -137,7 +143,7 @@
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col">
-                                                    <h5 class="card-title text-uppercase text-muted mb-0">Confirmed Cases </h5>
+                                                    <h5 class="card-title text-uppercase text-muted mb-0">{{__('appTerms.total')}} {{__('appTerms.confirmed')}} </h5>
                                                     <span
                                                         class="h2 font-weight-bold mb-0" id="countryConfirmed7"></span>
                                                 </div>
@@ -160,7 +166,7 @@
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col">
-                                                    <h5 class="card-title text-uppercase text-muted mb-0">Deaths Cases</h5>
+                                                    <h5 class="card-title text-uppercase text-muted mb-0">{{__('appTerms.total')}} {{__('appTerms.deaths')}}</h5>
                                                     <span
                                                         class="h2 font-weight-bold mb-0" id="countryDeaths7"></span>
                                                 </div>
@@ -183,7 +189,7 @@
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col">
-                                                    <h5 class="card-title text-uppercase text-muted mb-0">Recovered Cases</h5>
+                                                    <h5 class="card-title text-uppercase text-muted mb-0">{{__('appTerms.total')}} {{__('appTerms.recovered')}}</h5>
                                                     <span
                                                         class="h2 font-weight-bold mb-0" id="countryRecovered7"></span>
                                                 </div>
@@ -226,7 +232,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">
-                                            <h5 class="card-title text-uppercase text-muted mb-0">Active Cases</h5>
+                                            <h5 class="card-title text-uppercase text-muted mb-0">{{__('appTerms.active')}} {{__('appTerms.cases')}}</h5>
                                             <span id="countryActive"
                                                 class="h2 font-weight-bold mb-0"></span>
                                         </div>
@@ -239,7 +245,7 @@
 
                                     <p class="mt-3 mb-0 text-muted text-sm">
                                         <span class="text-danger mr-2" id="activePerc"> %</span>
-                                        <span class="text-nowrap">total of the world</span>
+                                        <span class="text-nowrap">{{__('country.worldTotal')}}</span>
                                     </p>
                                 </div>
                             </div>
@@ -249,7 +255,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">
-                                            <h5 class="card-title text-uppercase text-muted mb-0">Total Confirmed</h5>
+                                            <h5 class="card-title text-uppercase text-muted mb-0">{{__('appTerms.total')}} {{__('appTerms.confirmed')}}</h5>
                                             <span
                                                 class="h2 font-weight-bold mb-0 countryConfirmed"></span>
                                         </div>
@@ -262,7 +268,7 @@
 
                                     <p class="mt-3 mb-0 text-muted text-sm">
                                         <span class="text-danger mr-2" id="confirmedPerc"> %</span>
-                                        <span class="text-nowrap">total of the world</span>
+                                        <span class="text-nowrap">{{__('country.worldTotal')}}</span>
                                     </p>
                                 </div>
                             </div>
@@ -272,7 +278,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">
-                                            <h5 class="card-title text-uppercase text-muted mb-0">Total Deaths</h5>
+                                            <h5 class="card-title text-uppercase text-muted mb-0">{{__('appTerms.total')}} {{__('appTerms.deaths')}}</h5>
                                             <span id="countryDeaths"
                                                 class="h2 font-weight-bold mb-0"></span>
                                         </div>
@@ -285,7 +291,7 @@
 
                                     <p class="mt-3 mb-0 text-muted text-sm">
                                         <span class="text-danger mr-2" id="deathsPerc"> %</span>
-                                        <span class="text-nowrap">total of the world</span>
+                                        <span class="text-nowrap">{{__('country.worldTotal')}}</span>
                                     </p>
                                 </div>
                             </div>
@@ -295,7 +301,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">
-                                            <h5 class="card-title text-uppercase text-muted mb-0">Total Recovered</h5>
+                                            <h5 class="card-title text-uppercase text-muted mb-0">{{__('appTerms.total')}} {{__('appTerms.recovered')}}</h5>
                                             <span id="countryRecovered"
                                                 class="h2 font-weight-bold mb-0"></span>
                                         </div>
@@ -308,7 +314,7 @@
 
                                     <p class="mt-3 mb-0 text-muted text-sm">
                                         <span class="text-success mr-2" id="recoveredPerc"> %</span>
-                                        <span class="text-nowrap">total of the world</span>
+                                        <span class="text-nowrap">{{__('country.worldTotal')}}</span>
                                     </p>
                                 </div>
                             </div>
@@ -329,8 +335,9 @@
                         <div class="card-header border-0">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h6 class="text-uppercase mb-1 text-muted myFloatRight"><i class="far fa-clock fa-lg"></i> Updated <span class="globalTopUpdate">...</span></h6>
-                                    <h3 class="mb-0">Today statistics</h3>
+                                    <h6 class="text-uppercase mb-1 text-muted myFloatRight"><i class="far fa-clock fa-lg"></i>
+                                        {{__('appTerms.updated')}} <span class="globalTopUpdate">...</span></h6>
+                                    <h3 class="mb-0">{{__('country.todayStats')}}</h3>
                                 </div>
 
                             </div>
@@ -340,10 +347,10 @@
                             <table class="table align-items-center table-flush">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">Country</th>
-                                    <th scope="col">Confirmed</th>
-                                    <th scope="col">Deaths</th>
-                                    <th scope="col">Confirmed per mill</th>
+                                    <th scope="col">{{__('appTerms.country')}}</th>
+                                    <th scope="col">{{__('appTerms.confirmed')}}</th>
+                                    <th scope="col">{{__('appTerms.deaths')}}</th>
+                                    <th scope="col">{{__('country.ConfirmedPerMill')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -373,9 +380,10 @@
                         <div class="card-header border-0">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h6 class="text-uppercase mb-1 text-muted myFloatRight"><i class="far fa-clock fa-lg"></i> Updated <span class="globalTopUpdate">...</span></h6>
+                                    <h6 class="text-uppercase mb-1 text-muted myFloatRight"><i class="far fa-clock fa-lg"></i>
+                                        {{__('appTerms.updated')}} <span class="globalTopUpdate">...</span></h6>
 
-                                    <h3 class="mb-0">Confirmed</h3>
+                                    <h3 class="mb-0">{{__('appTerms.confirmed')}}</h3>
                                 </div>
                                 {{--                            <div class="col text-right">--}}
                                 {{--                                <a href="#!" class="btn btn-sm btn-primary">See all</a>--}}
@@ -387,9 +395,9 @@
                             <table class="table align-items-center table-flush">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">Country</th>
-                                    <th scope="col">Confirmed</th>
-                                    <th scope="col">of the Total</th>
+                                    <th scope="col">{{__('appTerms.country')}}</th>
+                                    <th scope="col">{{__('appTerms.confirmed')}}</th>
+                                    <th scope="col">{{__('global.ofTotal')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

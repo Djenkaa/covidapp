@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,16 +22,19 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
+
+Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function()
+{
 Route::get('/', 'HomeController@index')->name('home');
-
 Route::get('/country', 'HomeController@country')->name('country');
-Route::post('/country/get','HomeController@getCountry')->name('country.get');
-Route::post('/country/date', 'HomeController@byDate')->name('country.byDate');
-
 Route::get('/travel', 'HomeController@travel')->name('travel');
 Route::get('/support', 'HomeController@support')->name('support');
 
+});
+
 Route::post('/travel/news', 'HomeController@news')->name('travel.news');
+Route::post('/country/get','HomeController@getCountry')->name('country.get');
+Route::post('/country/date', 'HomeController@byDate')->name('country.byDate');
 
 //Route::group(['middleware' => 'auth'], function () {
 //	Route::resource('user', 'UserController', ['except' => ['show']]);
