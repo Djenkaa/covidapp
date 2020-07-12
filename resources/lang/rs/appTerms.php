@@ -3,7 +3,7 @@
 return [
     'updated'=>'Ažurirano',
     'confirmed'=>'Obolelo',
-    'deaths'=>'Umrlo',
+    'deaths'=>'Preminulo',
     'cases'=>'Slučajevi',
     'recovered'=>'Izlečeno',
     'country'=>'Država',
