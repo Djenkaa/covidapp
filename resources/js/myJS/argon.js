@@ -1113,6 +1113,8 @@ var SalesChart = function (chartArray) {
 
 function dailyChart() {
 
+    var countryList = $('#allCountries').data('allcountries');
+
     $.ajax({
         url: 'https://api.coronatracker.com/v3/analytics/dailyNewStats?limit=10',
         method: 'GET',
@@ -1125,14 +1127,14 @@ function dailyChart() {
                     data = JSON.parse(data);
                 }
 
-                var countries = [];
+                var countries = countryLocalized(countryList, data);
                 var cases = [];
                 var deaths = [];
 
 
                 for (var i = 0; i < data.length; i++) {
 
-                    countries.unshift(data[i].country);
+                    // countries.unshift(data[i].country);
                     cases.unshift(data[i].daily_cases);
                     deaths.unshift(data[i].daily_deaths);
                 }
@@ -1189,6 +1191,7 @@ function mostVulnerableCountries() {
 
                                 data = JSON.parse(data);
                             }
+
                             $('.globalTopUpdate').text(moment(data[0].lastUpdated).format('HH:mm'));
 
                             $('#mostVulnerableCountriesLoader').hide();
@@ -1218,12 +1221,13 @@ function mostVulnerableCountries() {
 function mostVulnerableCountriesTemplate(data) {
 
     var temp = ``;
+    var countryList = $('#allCountries').data('allcountries');
 
     for (var i = 0; i < data.length; i++) {
 
         temp += ` <tr>
          <th scope="row">
-                ${data[i].country}
+                ${countryList[data[i].countryCode]}
          </th>
          <td>
                 ${numeral(data[i].totalConfirmed).format('0,0')}
@@ -1243,6 +1247,7 @@ function mostVulnerableCountriesTemplate(data) {
 function top5ConfirmedTemplate(data, global) {
 
     var temp = ``;
+    var countryList = $('#allCountries').data('allcountries');
 
     for (var i = 0; i < data.length; i++) {
 
@@ -1250,7 +1255,7 @@ function top5ConfirmedTemplate(data, global) {
 
         temp += ` <tr>
                   <th scope="row">
-                  ${data[i].country}
+                  ${countryList[data[i].countryCode]}
                   </th>
                    <td>
                    ${numeral(data[i].totalConfirmed).format('0,0')}
@@ -1269,6 +1274,22 @@ function top5ConfirmedTemplate(data, global) {
                </tr>`;
     }
     $('#top5Confirmed').html(temp);
+}
+
+
+function countryLocalized(countryList, countries) {
+
+    var topCountries = [];
+
+    for(var i = 0; i<countries.length; i++){
+
+        var exist = countryList[countries[i].country_code];
+
+        if(exist){
+            topCountries.unshift(exist);
+        }
+    }
+    return topCountries;
 }
 
 
