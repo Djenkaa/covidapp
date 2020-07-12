@@ -29,6 +29,7 @@
                             <div id="dailyTop10Loader" data-text="{{__('global.chartText')}}" class="loader"
                                  data-confirmed="{{__('appTerms.confirmed')}}"
                                  data-deaths="{{__('appTerms.deaths')}}"
+                                 data-countries="{{json_encode(__('countries.countries'))}}"
                             ></div>
                             <!-- Chart wrapper -->
                             <canvas id="chart-sales" class="chart-canvas"></canvas>

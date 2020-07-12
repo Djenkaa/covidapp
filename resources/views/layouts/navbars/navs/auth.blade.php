@@ -9,7 +9,7 @@
                 <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="media align-items-center">
                         <span class="badge badge-light">
-                            <img alt="Image placeholder" src="https://www.countryflags.io/gb/shiny/32.png"> <i class="fas fa-sort-down text-white ml-1"></i>
+                            <img alt="Image placeholder" src="https://www.countryflags.io/{{app()->getLocale()}}/shiny/32.png"> <i class="fas fa-sort-down text-white ml-1"></i>
                         </span>
 {{--                        <div class="media-body ml-2 d-none d-lg-block">--}}
 {{--                            <span class="mb-0 text-sm  font-weight-bold"></span>--}}
@@ -20,13 +20,13 @@
                     <div class=" dropdown-header noti-title">
                         <h6 class="text-overflow m-0">{{__('appTerms.languages')}}</h6>
                     </div>
-                    <a hreflang="en" href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}" class="dropdown-item">
+                    <a hreflang="gb" href="{{ LaravelLocalization::getLocalizedURL('gb', null, [], true) }}" class="dropdown-item">
                         <img src="https://www.countryflags.io/gb/shiny/24.png">
-                        <span> English</span>
+                        <span> {{__('languages.en')}}</span>
                     </a>
-                    <a hreflang="sr" href="{{ LaravelLocalization::getLocalizedURL('sr', null, [], true) }}" class="dropdown-item">
+                    <a hreflang="sr" href="{{ LaravelLocalization::getLocalizedURL('rs', null, [], true) }}" class="dropdown-item">
                         <img src="https://www.countryflags.io/rs/shiny/24.png">
-                        <span> Serbian</span>
+                        <span> {{__('languages.sr')}}</span>
                     </a>
                 </div>
             </li>
