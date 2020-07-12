@@ -709,6 +709,10 @@ function percentage(a, b) {
     return result.toFixed(2);
 }
 
+function getKeyByValue(object, value) {
+    return Object.keys(object).find(key => object[key] === value);
+}
+
 
 function getCountries() {
 

@@ -1113,7 +1113,7 @@ var SalesChart = function (chartArray) {
 
 function dailyChart() {
 
-    var countryList = $('#allCountries').data('allcountries');
+    var countryList = $('#allCountries').data('allcountries') ?? [];
 
     $.ajax({
         url: 'https://api.coronatracker.com/v3/analytics/dailyNewStats?limit=10',
@@ -1221,7 +1221,7 @@ function mostVulnerableCountries() {
 function mostVulnerableCountriesTemplate(data) {
 
     var temp = ``;
-    var countryList = $('#allCountries').data('allcountries');
+    var countryList = $('#allCountries').data('allcountries') ?? [];
 
     for (var i = 0; i < data.length; i++) {
 
@@ -1247,7 +1247,7 @@ function mostVulnerableCountriesTemplate(data) {
 function top5ConfirmedTemplate(data, global) {
 
     var temp = ``;
-    var countryList = $('#allCountries').data('allcountries');
+    var countryList = $('#allCountries').data('allcountries') ?? [];
 
     for (var i = 0; i < data.length; i++) {
 

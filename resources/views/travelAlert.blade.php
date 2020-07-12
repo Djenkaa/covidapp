@@ -9,11 +9,16 @@
         @include('layouts.headers.guest',['text'=>__('travelAlert.text'),'icon'=>'far fa-newspaper'])
 
 
+        @php
 
+            $countries =__('countries.countries');
+            asort($countries);
+
+        @endphp
 
     <travel-alert
         locale="{{app()->getLocale()}}"
-        allcountries="{{json_encode(__('countries.countries'))}}"
+        allcountries="{{json_encode($countries)}}"
         inline-template>
 
         <div class="container mt--8 pb-5" v-cloak>
