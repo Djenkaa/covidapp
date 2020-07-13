@@ -680,12 +680,14 @@ var countryChart = function (stats) {
 
 function countryStats(data, global) {
 
+    var countries = $('#countries').data('countries');
+
     $('#countryActive').text(numeral(data.activeCases).format('0,0'));
     $('#countryRecovered').text(numeral(data.totalRecovered).format('0,0'));
     $('#countryDeaths').text(numeral(data.totalDeaths).format('0,0'));
     $('.countryConfirmed').text(numeral(data.totalConfirmed).format('0,0'));
 
-    $('.countryName').text(data.country);
+    $('.countryName').text(countries[data.countryCode]);
     $('#countryConfirmedToday').text(numeral(data.dailyConfirmed).format('0,0'));
     $('#countryDeathsToday').text(numeral(data.dailyDeaths).format('0,0'));
     $('#countryConfirmedPerMill').text(numeral(data.totalConfirmedPerMillionPopulation).format('0,0'));
