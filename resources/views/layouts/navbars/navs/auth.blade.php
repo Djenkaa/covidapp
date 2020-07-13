@@ -9,7 +9,7 @@
                 <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="media align-items-center">
                         <span class="badge badge-light">
-                            <img alt="Image placeholder" src="https://www.countryflags.io/{{app()->getLocale()}}/shiny/32.png"> <i class="fas fa-sort-down text-white ml-1"></i>
+                            <img alt="Image placeholder" src="/img/flags/32/{{app()->getLocale()}}.png"> <i class="fas fa-sort-down text-white ml-1"></i>
                         </span>
 {{--                        <div class="media-body ml-2 d-none d-lg-block">--}}
 {{--                            <span class="mb-0 text-sm  font-weight-bold"></span>--}}
@@ -22,11 +22,11 @@
                     </div>
                     <div class="dropdown-divider"></div>
                     <a hreflang="gb" href="{{ LaravelLocalization::getLocalizedURL('gb', null, [], true) }}" class="dropdown-item">
-                        <img src="https://www.countryflags.io/gb/shiny/24.png">
+                        <img src="/img/flags/24/gb.png">
                         <span> {{__('languages.en')}}</span>
                     </a>
                     <a hreflang="sr" href="{{ LaravelLocalization::getLocalizedURL('rs', null, [], true) }}" class="dropdown-item">
-                        <img src="https://www.countryflags.io/rs/shiny/24.png">
+                        <img src="/img/flags/24/rs.png">
                         <span> {{__('languages.sr')}}</span>
                     </a>
                 </div>

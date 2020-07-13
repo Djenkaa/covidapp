@@ -125,8 +125,6 @@
 
 <style scoped>
 
-    [v-clock]{
-        display: none;
-    }
+
 
 </style>
