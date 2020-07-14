@@ -1111,6 +1111,28 @@ var SalesChart = function (chartArray) {
 };
 
 
+function mostCriticalCountry(countryCode){
+
+    $.get(`https://api.coronatracker.com/v3/stats/worldometer/country?countryCode=${countryCode.country_code}`)
+        .done(function (data) {
+            if(data){
+
+                $('#criticalCountryName').text(data[0].country);
+                $('#criticalCountryConfirmed').text(numeral(data[0].dailyConfirmed).format('0,0'));
+                $('#criticalCountryDeaths').text(numeral(data[0].dailyDeaths).format('0,0'));
+                $('#criticalCountryCritical').text(numeral(data[0].totalCritical).format('0,0'));
+                $('#criticalCountryUpdated').text(moment(data[0].lastUpdated).format('HH:mm'));
+
+                var imgLink = `https://www.countryflags.io/${data[0].countryCode}/shiny/48.png`;
+
+                $('#criticalCountryImg').attr('src', imgLink);
+                $('#mostCriticalCountryLoader').hide();
+                $('#mostCriticalCountry').show();
+            }
+        });
+}
+
+
 function dailyChart() {
 
     $.ajax({
@@ -1124,6 +1146,9 @@ function dailyChart() {
                 if(typeof data == 'string'){
                     data = JSON.parse(data);
                 }
+
+                mostCriticalCountry(data[0]);
+
                 var countryList = $('#allCountries').data('allcountries');
 
                 var countries = countryLocalized(countryList, data);

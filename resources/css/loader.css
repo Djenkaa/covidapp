@@ -82,3 +82,8 @@
 [v-cloak] {
     display: none
 }
+
+
+.shadow-critical{
+    box-shadow: 0 0 20px 5px rgba(245, 54, 92, .2);
+}
