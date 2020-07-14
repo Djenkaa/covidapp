@@ -25,7 +25,7 @@ $(document).ready(function () {
     dailyChart();
     mostVulnerableCountries();
 
-});
+
 
 'use strict';
 
@@ -1323,7 +1323,7 @@ function countryLocalized(countryList, countries) {
 }
 
 
-
+});
 
 
 
