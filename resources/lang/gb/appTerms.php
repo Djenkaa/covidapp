@@ -15,6 +15,7 @@ return [
     'general'=>'General',
     'last7Days'=>'Last 7 Days',
     'covidStats'=>'COVID-19 statistics',
-    'languages'=>'Languages'
+    'languages'=>'Languages',
+    'today'=>'Today'
 
 ];

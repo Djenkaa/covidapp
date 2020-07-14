@@ -15,5 +15,6 @@ return [
     'general'=>'Generalno',
     'last7Days'=>'Poslednjih 7 dana',
     'covidStats'=>'COVID-19 statistika',
-    'languages'=>'Jezici'
+    'languages'=>'Jezici',
+    'today'=>'Danas'
 ];
