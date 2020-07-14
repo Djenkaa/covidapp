@@ -1113,11 +1113,13 @@ var SalesChart = function (chartArray) {
 
 function mostCriticalCountry(countryCode){
 
+    var countryList = $('#allCountries').data('allcountries');
+
     $.get(`https://api.coronatracker.com/v3/stats/worldometer/country?countryCode=${countryCode.country_code}`)
         .done(function (data) {
             if(data){
 
-                $('#criticalCountryName').text(data[0].country);
+                $('#criticalCountryName').text(countryList[data[0].countryCode]);
                 $('#criticalCountryConfirmed').text(numeral(data[0].dailyConfirmed).format('0,0'));
                 $('#criticalCountryDeaths').text(numeral(data[0].dailyDeaths).format('0,0'));
                 $('#criticalCountryCritical').text(numeral(data[0].totalCritical).format('0,0'));
