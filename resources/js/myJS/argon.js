@@ -1254,7 +1254,7 @@ function mostVulnerableCountriesTemplate(data) {
 
         temp += ` <tr>
          <th scope="row">
-                ${countryList[data[i].countryCode]}
+            <img src="https://www.countryflags.io/${data[i].countryCode}/shiny/32.png" alt=""> ${countryList[data[i].countryCode]}
          </th>
          <td>
                 ${numeral(data[i].totalConfirmed).format('0,0')}
@@ -1284,7 +1284,7 @@ function top5ConfirmedTemplate(data, global) {
 
         temp += ` <tr>
                   <th scope="row">
-                  ${countryList[data[i].countryCode]}
+                  <img src="https://www.countryflags.io/${data[i].countryCode}/shiny/32.png" alt=""> ${countryList[data[i].countryCode]}
                   </th>
                    <td>
                    ${numeral(data[i].totalConfirmed).format('0,0')}

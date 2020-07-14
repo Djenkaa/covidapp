@@ -687,7 +687,7 @@ function countryStats(data, global) {
     $('#countryDeaths').text(numeral(data.totalDeaths).format('0,0'));
     $('.countryConfirmed').text(numeral(data.totalConfirmed).format('0,0'));
 
-    $('.countryName').text(countries[data.countryCode]);
+    $('.countryName').html(`<img src="https://www.countryflags.io/${data.countryCode}/shiny/32.png" alt="" /><span> ${countries[data.countryCode]}</span>`);
     $('#countryConfirmedToday').text(numeral(data.dailyConfirmed).format('0,0'));
     $('#countryDeathsToday').text(numeral(data.dailyDeaths).format('0,0'));
     $('#countryConfirmedPerMill').text(numeral(data.totalConfirmedPerMillionPopulation).format('0,0'));
