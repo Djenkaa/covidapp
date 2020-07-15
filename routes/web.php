@@ -43,3 +43,7 @@ Route::post('/country/date', 'HomeController@byDate')->name('country.byDate');
 //	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 //});
 
+
+// LIVE INTERFACE
+
+Route::get('/live','LiveController@dashboard')->name('live.dashboard');
