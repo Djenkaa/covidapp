@@ -27,13 +27,21 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <!-- Icons -->
     <script src="https://kit.fontawesome.com/f5d5be0339.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/live.css">
+    @yield('myCss')
 
 </head>
 <body>
 
+@include('live.includes.header')
+
+<div style="padding: 20px;">
     @yield('content')
+</div>
 
 
+
+    <script src="/js/live.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144192815-2"></script>
 <script>

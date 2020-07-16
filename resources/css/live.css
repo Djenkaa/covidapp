@@ -1,0 +1,18 @@
+.tableFixHead {
+    overflow-y: hidden; height: 400px;
+}
+
+
+.tableFixHead thead th {
+    position: sticky; top: 0;
+}
+
+/* Just common table stuff. Really. */
+table  {
+    border-collapse: collapse; width: 100%;
+}
+
+
+th, td {
+    padding: 8px 16px;
+}

@@ -33,7 +33,8 @@ mix.scripts([
     'resources/js/myJS/Chart.min.js',
     'resources/js/myJS/Chart.extension.js',
     'resources/js/myJS/argon.js',
-    'resources/js/myJS/countryChart.js'
+    'resources/js/myJS/countryChart.js',
+    'resources/js/myJS/liveArgon.js'
 
 ],'public/js/all.js');
 
@@ -43,7 +44,8 @@ mix.scripts([
 mix.styles([
     'resources/css/argon.css',
     'resources/css/nucleo.css',
-    'resources/css/loader.css'
+    'resources/css/loader.css',
+    'resources/css/live.css'
 
 ], 'public/css/live.css');
 
@@ -56,6 +58,8 @@ mix.scripts([
     'resources/js/myJS/numeral.js',
     'resources/js/myJS/Chart.min.js',
     'resources/js/myJS/Chart.extension.js',
+    'resources/js/myJS/liveArgon.js',
+    'resources/js/myJS/live.js'
 
 ],'public/js/live.js');
 
