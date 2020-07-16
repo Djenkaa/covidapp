@@ -97,13 +97,14 @@
     {{--  CHARTS  --}}
 
     <div class="row mt-4">
-        <div class="col-xl-8 mb-5 mb-xl-0" style="display: none;">
+
+        <div class="col-xl-8 mb-5 mb-xl-0" id="panel1">
             <div class="card bg-gradient-default shadow">
                 <div class="card-header bg-transparent">
                     <div class="row align-items-center">
                         <div class="col">
                             <h6 class="text-uppercase text-light ls-1 mb-1">Overview</h6>
-                            <h2 class="text-white mb-0">Sales value</h2>
+                            <h2 class="text-white mb-0">Daily Stats</h2>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-chart-bar fa-2x"></i>
@@ -115,6 +116,7 @@
                     <!-- Chart -->
                     <div class="chart">
                         <!-- Chart wrapper -->
+                        <div id="liveChartLoader" class="loader"></div>
                         <canvas id="live-chart" class="chart-canvas"></canvas>
                     </div>
 
@@ -163,6 +165,7 @@
                                 </thead>
                                 <tbody class="list" id="theWorstCountry">
 
+                                <div id="theWorstCountryLoader" class="loader"></div>
 
                                 </tbody>
                             </table>
@@ -176,7 +179,7 @@
         </div>
 
 
-        <div class="col-xl-8 mb-5 mb-xl-0">
+        <div id="panel2" class="col-xl-8 mb-5 mb-xl-0" style="display: none;">
             <div class="card bg-gradient-default shadow">
                 <div class="card-header bg-transparent">
                     <div class="row align-items-center">
@@ -218,52 +221,7 @@
                                     </thead>
                                     <tbody id="theWorstCountries" class="list">
 
-{{--                                    <tr>--}}
-{{--                                        <th scope="row">--}}
-{{--                                            <div class="media align-items-center">--}}
-
-{{--                                                <img src="https://www.countryflags.io/be/shiny/48.png">--}}
-{{--                                                <span class="name mb-0 text-sm"> Drzava</span>--}}
-
-{{--                                            </div>--}}
-{{--                                        </th>--}}
-{{--                                        <td class="budget">--}}
-{{--                                            $2500 USD--}}
-{{--                                        </td>--}}
-{{--                                        <td>--}}
-{{--                                            543653--}}
-{{--                                        </td>--}}
-
-{{--                                        <td>--}}
-{{--                                            <div class="d-flex align-items-center">--}}
-{{--                                                <span class="completion mr-2">60%</span>--}}
-{{--                                                <div>--}}
-{{--                                                    <div class="progress">--}}
-{{--                                                        <div class="progress-bar bg-warning" role="progressbar"--}}
-{{--                                                             aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"--}}
-{{--                                                             style="width: 60%;"></div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                                <span class="ml-2"> <i class="fas fa-globe-americas fa-lg"></i></span>--}}
-{{--                                            </div>--}}
-{{--                                        </td>--}}
-{{--                                        <td>--}}
-{{--                                            <div class="d-flex align-items-center">--}}
-{{--                                                <span class="completion mr-2">60%</span>--}}
-{{--                                                <div>--}}
-{{--                                                    <div class="progress">--}}
-{{--                                                        <div class="progress-bar bg-warning" role="progressbar"--}}
-{{--                                                             aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"--}}
-{{--                                                             style="width: 60%;"></div>--}}
-{{--                                                    </div>--}}
-
-{{--                                                </div>--}}
-{{--                                                <span class="ml-2"> <i class="fas fa-globe-americas fa-lg"></i></span>--}}
-{{--                                            </div>--}}
-{{--                                        </td>--}}
-
-{{--                                    </tr>--}}
-
+                                    <div id="theWorstCountriesLoader" class="loader"></div>
 
                                     </tbody>
                                 </table>
@@ -308,6 +266,8 @@
                                 </thead>
                                 <tbody id="listOfCoutrnies">
 
+                                <div id="listOfCoutrniesLoader" class="loader" style="color: #5e72e4"></div>
+
                                 </tbody>
                             </table>
                         </div>
@@ -322,13 +282,13 @@
                         <div class="col-lg-7">
                             <h5 class="card-title text-uppercase mb-0">The most successful country</h5>
                             <span id="successfulCountryName" class="h2 font-weight-bold mb-0 text-muted">
-                           <img src="https://www.countryflags.io/be/shiny/48.png"> Gvineja
+                           Loading ...
                         </span>
                         </div>
                         <div class="col-lg-3 text-center">
                             <h5 class="card-title text-uppercase mb-0">Confirmed</h5>
 
-                            <h1 id="successfulCountryConfirmed">0</h1>
+                            <h1 id="successfulCountryConfirmed">...</h1>
                         </div>
                         <div class="col-lg-2 text-right">
 

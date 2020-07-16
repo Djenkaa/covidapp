@@ -18307,6 +18307,7 @@ function chartData() {
                     confirmed.unshift(data[i].daily_cases);
                     deaths.unshift(data[i].daily_deaths);
                 }
+                $('#liveChartLoader').hide();
                 liveChart({countries, confirmed, deaths});
 
             }
@@ -18353,6 +18354,7 @@ function slideAllCountries() {
 
                 var holderHeight = $('.tableFixHead').height();
                 $('#countryHolder').css('margin-top', holderHeight);
+                $('#listOfCoutrniesLoader').hide();
                 $('#listOfCoutrnies').html(temp);
 
                 countries = true;
@@ -18423,10 +18425,7 @@ function theWorstCountryTemplate(data) {
                                    ${numeral(data.dailyConfirmed).format('0,0')}
                                 </td>
                                 <td>
-<!--                    <span class="badge badge-dot mr-4">-->
-<!--                      <i class="bg-warning"></i>-->
-<!--                      <span class="status">pending</span>-->
-<!--                    </span>-->
+
                                 ${numeral(data.dailyDeaths).format(0,0)}
                                 </td>
                                 <td>
@@ -18434,14 +18433,7 @@ function theWorstCountryTemplate(data) {
 
                                 </td>
                                 <td>
-<!--                                    <div class="d-flex align-items-center">-->
-<!--                                        <span class="completion mr-2">60%</span>-->
-<!--                                        <div>-->
-<!--                                            <div class="progress">-->
-<!--                                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
+
                                     ${numeral(data.totalDeaths).format('0,0')}
                                 </td>
                                 <td>
@@ -18451,6 +18443,7 @@ function theWorstCountryTemplate(data) {
 
                             </tr>`;
 
+    $('#theWorstCountryLoader').hide();
     $('#theWorstCountry').html(temp);
 }
 
@@ -18510,9 +18503,6 @@ function topTheWorstCountries() {
 
                 $.get('https://api.coronatracker.com/v3/stats/worldometer/country?limit=7')
                     .done(function (data) {
-
-                        console.log(data);
-                        console.log(global);
 
                         topTheWorstCountriesTemplate(data, global);
                     });
@@ -18579,9 +18569,35 @@ function topTheWorstCountriesTemplate(data, global) {
 
         </tr>`
     }
+    $('#theWorstCountriesLoader').hide();
     $('#theWorstCountries').html(temp);
 
 }
+
+var changePanel = 1;
+
+setInterval(function () {
+
+    if(changePanel == 1){
+
+        $('#panel1').fadeOut(500, function(){
+
+            $('#panel2').fadeIn(500);
+            changePanel = 2;
+        });
+    }
+    else if(changePanel == 2){
+
+        $('#panel2').fadeOut(500, function(){
+
+            $('#panel1').fadeIn(500);
+            changePanel = 1;
+        });
+    }
+
+}, 1000 * 30);
+
+
 
 
 });
