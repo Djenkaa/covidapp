@@ -33,8 +33,14 @@ $(document).ready(function () {
                                 if (!(value % 10)) {
                                     return numeral(value).format('0,0');
                                 }
-                            }
+                            },
+                            fontSize: 16
                         },
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            fontSize: 16
+                        }
                     }]
                 },
                 tooltips: {
@@ -61,6 +67,9 @@ $(document).ready(function () {
                 legend: {
                     display: true,
                     position: 'bottom',
+                    labels:{
+                        fontSize: 16
+                    }
                 },
             },
             data: {
@@ -148,7 +157,7 @@ function slideAllCountries() {
                     temp += `
                        <tr>
                             <th scope="row">
-                                <img src="https://www.countryflags.io/${data[i].countryCode}/shiny/32.png" alt=""> ${data[i].country.length > 15 ? data[i].country.substring(0, 15) + '...' : data[i].country}
+                                <img src="https://www.countryflags.io/${data[i].countryCode}/shiny/32.png" alt=""> <span style="font-size: 15px;">${data[i].country.length > 15 ? data[i].country.substring(0, 15) + '...' : data[i].country}</span>
                             </th>
                             <td>
                                ${numeral(data[i].totalConfirmed).format('0,0')}
@@ -228,7 +237,7 @@ function theWorstCountryTemplate(data) {
                                     <div class="media align-items-center">
 
                                         <img src="https://www.countryflags.io/${data.countryCode}/shiny/48.png">
-                                        <span class="name mb-0 text-sm ml-1"> ${data.country}</span>
+                                        <span class="name mb-0 text-sm ml-1" style="font-size: 16px !important;"> ${data.country}</span>
 
                                     </div>
                                 </th>
@@ -346,7 +355,7 @@ function topTheWorstCountriesTemplate(data, global) {
                     <div class="media align-items-center">
 
                         <img src="https://www.countryflags.io/${data[i].countryCode}/shiny/48.png">
-                        <span class="name mb-0 text-sm ml-1"> ${data[i].country}</span>
+                        <span class="name mb-0 text-sm ml-1" style="font-size: 16px !important;"> ${data[i].country}</span>
 
                     </div>
                 </th>

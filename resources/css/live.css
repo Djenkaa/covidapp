@@ -21,6 +21,11 @@ table tr{
     font-weight: 700;
 }
 
+table tr td{
+    font-size: 15px !important;
+}
+
 table th {
     font-weight: bold !important;
+    font-size: 13px !important;
 }
