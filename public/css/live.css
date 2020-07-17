@@ -20849,3 +20849,30 @@ License - nucleoapp.com/license/
 .shadow-critical{
     box-shadow: 0 0 20px 5px rgba(245, 54, 92, .2);
 }
+
+.tableFixHead {
+    overflow-y: hidden; height: 400px;
+}
+
+
+.tableFixHead thead th {
+    position: sticky; top: 0;
+}
+
+/* Just common table stuff. Really. */
+table  {
+    border-collapse: collapse; width: 100%;
+}
+
+
+th, td {
+    padding: 8px 16px;
+}
+
+table tr{
+    font-weight: 700;
+}
+
+table th {
+    font-weight: bold !important;
+}

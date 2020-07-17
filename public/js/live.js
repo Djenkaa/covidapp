@@ -17273,3 +17273,1351 @@ Chart.elements.Rectangle.prototype.draw = function() {
 		ctx.stroke();
 	}
 };
+
+'use strict';
+
+var Datepicker = (function () {
+
+    // Variables
+
+    var $datepicker = $('.datepicker');
+
+
+    // Methods
+
+    function init($this) {
+        var options = {
+            disableTouchKeyboard: true,
+            autoclose: false
+        };
+
+        $this.datepicker(options);
+    }
+
+
+    // Events
+
+    if ($datepicker.length) {
+        $datepicker.each(function () {
+            init($(this));
+        });
+    }
+
+})();
+
+//
+// Icon code copy/paste
+//
+
+'use strict';
+
+var CopyIcon = (function () {
+
+    // Variables
+
+    var $element = '.btn-icon-clipboard',
+        $btn = $($element);
+
+
+    // Methods
+
+    function init($this) {
+        $this.tooltip().on('mouseleave', function () {
+            // Explicitly hide tooltip, since after clicking it remains
+            // focused (as it's a button), so tooltip would otherwise
+            // remain visible until focus is moved away
+            $this.tooltip('hide');
+        });
+
+        var clipboard = new ClipboardJS($element);
+
+        clipboard.on('success', function (e) {
+            $(e.trigger)
+                .attr('title', 'Copied!')
+                .tooltip('_fixTitle')
+                .tooltip('show')
+                .attr('title', 'Copy to clipboard')
+                .tooltip('_fixTitle')
+
+            e.clearSelection()
+        });
+    }
+
+
+    // Events
+    if ($btn.length) {
+        init($btn);
+    }
+
+})();
+
+//
+// Form control
+//
+
+'use strict';
+
+var FormControl = (function () {
+
+    // Variables
+
+    var $input = $('.form-control');
+
+
+    // Methods
+
+    function init($this) {
+        $this.on('focus blur', function (e) {
+            $(this).parents('.form-group').toggleClass('focused', (e.type === 'focus' || this.value.length > 0));
+        }).trigger('blur');
+    }
+
+
+    // Events
+
+    if ($input.length) {
+        init($input);
+    }
+
+})();
+
+//
+// Google maps
+//
+
+var $map = $('#map-canvas'),
+    map,
+    lat,
+    lng,
+    color = "#5e72e4";
+
+function initMap() {
+
+    map = document.getElementById('map-canvas');
+    lat = map.getAttribute('data-lat');
+    lng = map.getAttribute('data-lng');
+
+    var myLatlng = new google.maps.LatLng(lat, lng);
+    var mapOptions = {
+        zoom: 12,
+        scrollwheel: false,
+        center: myLatlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        styles: [{
+            "featureType": "administrative",
+            "elementType": "labels.text.fill",
+            "stylers": [{"color": "#444444"}]
+        }, {"featureType": "landscape", "elementType": "all", "stylers": [{"color": "#f2f2f2"}]}, {
+            "featureType": "poi",
+            "elementType": "all",
+            "stylers": [{"visibility": "off"}]
+        }, {
+            "featureType": "road",
+            "elementType": "all",
+            "stylers": [{"saturation": -100}, {"lightness": 45}]
+        }, {
+            "featureType": "road.highway",
+            "elementType": "all",
+            "stylers": [{"visibility": "simplified"}]
+        }, {
+            "featureType": "road.arterial",
+            "elementType": "labels.icon",
+            "stylers": [{"visibility": "off"}]
+        }, {
+            "featureType": "transit",
+            "elementType": "all",
+            "stylers": [{"visibility": "off"}]
+        }, {"featureType": "water", "elementType": "all", "stylers": [{"color": color}, {"visibility": "on"}]}]
+    }
+
+    map = new google.maps.Map(map, mapOptions);
+
+    var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        animation: google.maps.Animation.DROP,
+        title: 'Hello World!'
+    });
+
+    var contentString = '<div class="info-window-content"><h2>Argon Dashboard</h2>' +
+        '<p>A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</p></div>';
+
+    var infowindow = new google.maps.InfoWindow({
+        content: contentString
+    });
+
+    google.maps.event.addListener(marker, 'click', function () {
+        infowindow.open(map, marker);
+    });
+}
+
+if ($map.length) {
+    google.maps.event.addDomListener(window, 'load', initMap);
+}
+
+// //
+// // Headroom - show/hide navbar on scroll
+// //
+//
+// 'use strict';
+//
+// var Headroom = (function() {
+//
+// 	// Variables
+//
+// 	var $headroom = $('#navbar-main');
+//
+//
+// 	// Methods
+//
+// 	function init($this) {
+//
+//     var headroom = new Headroom(document.querySelector("#navbar-main"), {
+//         offset: 300,
+//         tolerance: {
+//             up: 30,
+//             down: 30
+//         },
+//     });
+//
+//
+//
+// 	// Events
+//
+// 	if ($headroom.length) {
+// 		headroom.init();
+// 	}
+//
+// })();
+
+//
+// Navbar
+//
+
+'use strict';
+
+var Navbar = (function () {
+
+    // Variables
+
+    var $nav = $('.navbar-nav, .navbar-nav .nav');
+    var $collapse = $('.navbar .collapse');
+    var $dropdown = $('.navbar .dropdown');
+
+    // Methods
+
+    function accordion($this) {
+        $this.closest($nav).find($collapse).not($this).collapse('hide');
+    }
+
+    function closeDropdown($this) {
+        var $dropdownMenu = $this.find('.dropdown-menu');
+
+        $dropdownMenu.addClass('close');
+
+        setTimeout(function () {
+            $dropdownMenu.removeClass('close');
+        }, 200);
+    }
+
+
+    // Events
+
+    $collapse.on({
+        'show.bs.collapse': function () {
+            accordion($(this));
+        }
+    })
+
+    $dropdown.on({
+        'hide.bs.dropdown': function () {
+            closeDropdown($(this));
+        }
+    })
+
+})();
+
+
+//
+// Navbar collapse
+//
+
+
+var NavbarCollapse = (function () {
+
+    // Variables
+
+    var $nav = $('.navbar-nav'),
+        $collapse = $('.navbar .collapse');
+
+
+    // Methods
+
+    function hideNavbarCollapse($this) {
+        $this.addClass('collapsing-out');
+    }
+
+    function hiddenNavbarCollapse($this) {
+        $this.removeClass('collapsing-out');
+    }
+
+
+    // Events
+
+    if ($collapse.length) {
+        $collapse.on({
+            'hide.bs.collapse': function () {
+                hideNavbarCollapse($collapse);
+            }
+        })
+
+        $collapse.on({
+            'hidden.bs.collapse': function () {
+                hiddenNavbarCollapse($collapse);
+            }
+        })
+    }
+
+})();
+
+//
+// Form control
+//
+
+'use strict';
+
+var noUiSlider = (function () {
+
+    // Variables
+
+    // var $sliderContainer = $('.input-slider-container'),
+    // 		$slider = $('.input-slider'),
+    // 		$sliderId = $slider.attr('id'),
+    // 		$sliderMinValue = $slider.data('range-value-min');
+    // 		$sliderMaxValue = $slider.data('range-value-max');;
+
+
+    // // Methods
+    //
+    // function init($this) {
+    // 	$this.on('focus blur', function(e) {
+    //       $this.parents('.form-group').toggleClass('focused', (e.type === 'focus' || this.value.length > 0));
+    //   }).trigger('blur');
+    // }
+    //
+    //
+    // // Events
+    //
+    // if ($input.length) {
+    // 	init($input);
+    // }
+
+
+    if ($(".input-slider-container")[0]) {
+        $('.input-slider-container').each(function () {
+
+            var slider = $(this).find('.input-slider');
+            var sliderId = slider.attr('id');
+            var minValue = slider.data('range-value-min');
+            var maxValue = slider.data('range-value-max');
+
+            var sliderValue = $(this).find('.range-slider-value');
+            var sliderValueId = sliderValue.attr('id');
+            var startValue = sliderValue.data('range-value-low');
+
+            var c = document.getElementById(sliderId),
+                d = document.getElementById(sliderValueId);
+
+            noUiSlider.create(c, {
+                start: [parseInt(startValue)],
+                connect: [true, false],
+                //step: 1000,
+                range: {
+                    'min': [parseInt(minValue)],
+                    'max': [parseInt(maxValue)]
+                }
+            });
+
+            c.noUiSlider.on('update', function (a, b) {
+                d.textContent = a[b];
+            });
+        })
+    }
+
+    if ($("#input-slider-range")[0]) {
+        var c = document.getElementById("input-slider-range"),
+            d = document.getElementById("input-slider-range-value-low"),
+            e = document.getElementById("input-slider-range-value-high"),
+            f = [d, e];
+
+        noUiSlider.create(c, {
+            start: [parseInt(d.getAttribute('data-range-value-low')), parseInt(e.getAttribute('data-range-value-high'))],
+            connect: !0,
+            range: {
+                min: parseInt(c.getAttribute('data-range-value-min')),
+                max: parseInt(c.getAttribute('data-range-value-max'))
+            }
+        }), c.noUiSlider.on("update", function (a, b) {
+            f[b].textContent = a[b]
+        })
+    }
+
+})();
+
+//
+// Popover
+//
+
+'use strict';
+
+var Popover = (function () {
+
+    // Variables
+
+    var $popover = $('[data-toggle="popover"]'),
+        $popoverClass = '';
+
+
+    // Methods
+
+    function init($this) {
+        if ($this.data('color')) {
+            $popoverClass = 'popover-' + $this.data('color');
+        }
+
+        var options = {
+            trigger: 'focus',
+            template: '<div class="popover ' + $popoverClass + '" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
+        };
+
+        $this.popover(options);
+    }
+
+
+    // Events
+
+    if ($popover.length) {
+        $popover.each(function () {
+            init($(this));
+        });
+    }
+
+})();
+
+//
+// Scroll to (anchor links)
+//
+
+'use strict';
+
+var ScrollTo = (function () {
+
+    //
+    // Variables
+    //
+
+    var $scrollTo = $('.scroll-me, [data-scroll-to], .toc-entry a');
+
+
+    //
+    // Methods
+    //
+
+    function scrollTo($this) {
+        var $el = $this.attr('href');
+        var offset = $this.data('scroll-to-offset') ? $this.data('scroll-to-offset') : 0;
+        var options = {
+            scrollTop: $($el).offset().top - offset
+        };
+
+        // Animate scroll to the selected section
+        $('html, body').stop(true, true).animate(options, 600);
+
+        event.preventDefault();
+    }
+
+
+    //
+    // Events
+    //
+
+    if ($scrollTo.length) {
+        $scrollTo.on('click', function (event) {
+            scrollTo($(this));
+        });
+    }
+
+})();
+
+//
+// Tooltip
+//
+
+'use strict';
+
+var Tooltip = (function () {
+
+    // Variables
+
+    var $tooltip = $('[data-toggle="tooltip"]');
+
+
+    // Methods
+
+    function init() {
+        $tooltip.tooltip();
+    }
+
+
+    // Events
+
+    if ($tooltip.length) {
+        init();
+    }
+
+})();
+
+//
+// Charts
+//
+
+'use strict';
+
+var Charts = (function () {
+
+    // Variable
+
+    var $toggle = $('[data-toggle="chart"]');
+    var mode = 'light';//(themeMode) ? themeMode : 'light';
+    var fonts = {
+        base: 'Open Sans'
+    }
+
+    // Colors
+    var colors = {
+        gray: {
+            100: '#f6f9fc',
+            200: '#e9ecef',
+            300: '#dee2e6',
+            400: '#ced4da',
+            500: '#adb5bd',
+            600: '#8898aa',
+            700: '#525f7f',
+            800: '#32325d',
+            900: '#212529'
+        },
+        theme: {
+            'default': '#172b4d',
+            'primary': '#5e72e4',
+            'secondary': '#f4f5f7',
+            'info': '#11cdef',
+            'success': '#2dce89',
+            'danger': '#f5365c',
+            'warning': '#fb6340'
+        },
+        black: '#12263F',
+        white: '#FFFFFF',
+        transparent: 'transparent',
+    };
+
+
+    // Methods
+
+    // Chart.js global options
+    function chartOptions() {
+
+        // Options
+        var options = {
+            defaults: {
+                global: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    defaultColor: (mode == 'dark') ? colors.gray[700] : colors.gray[600],
+                    defaultFontColor: (mode == 'dark') ? colors.gray[700] : colors.gray[600],
+                    defaultFontFamily: fonts.base,
+                    defaultFontSize: 13,
+                    layout: {
+                        padding: 0
+                    },
+                    legend: {
+                        display: false,
+                        position: 'bottom',
+                        labels: {
+                            usePointStyle: true,
+                            padding: 16
+                        }
+                    },
+                    elements: {
+                        point: {
+                            radius: 0,
+                            backgroundColor: colors.theme['primary']
+                        },
+                        line: {
+                            tension: .4,
+                            borderWidth: 4,
+                            borderColor: colors.theme['primary'],
+                            backgroundColor: colors.transparent,
+                            borderCapStyle: 'rounded'
+                        },
+                        rectangle: {
+                            backgroundColor: colors.theme['warning']
+                        },
+                        arc: {
+                            backgroundColor: colors.theme['primary'],
+                            borderColor: (mode == 'dark') ? colors.gray[800] : colors.white,
+                            borderWidth: 4
+                        }
+                    },
+                    tooltips: {
+                        enabled: false,
+                        mode: 'index',
+                        intersect: false,
+                        custom: function (model) {
+
+                            // Get tooltip
+                            var $tooltip = $('#chart-tooltip');
+
+                            // Create tooltip on first render
+                            if (!$tooltip.length) {
+                                $tooltip = $('<div id="chart-tooltip" class="popover bs-popover-top" role="tooltip"></div>');
+
+                                // Append to body
+                                $('body').append($tooltip);
+                            }
+
+                            // Hide if no tooltip
+                            if (model.opacity === 0) {
+                                $tooltip.css('display', 'none');
+                                return;
+                            }
+
+                            function getBody(bodyItem) {
+                                return bodyItem.lines;
+                            }
+
+                            // Fill with content
+                            if (model.body) {
+                                var titleLines = model.title || [];
+                                var bodyLines = model.body.map(getBody);
+                                var html = '';
+
+                                // Add arrow
+                                html += '<div class="arrow"></div>';
+
+                                // Add header
+                                titleLines.forEach(function (title) {
+                                    html += '<h3 class="popover-header text-center">' + title + '</h3>';
+                                });
+
+                                // Add body
+                                bodyLines.forEach(function (body, i) {
+                                    var colors = model.labelColors[i];
+                                    var styles = 'background-color: ' + colors.backgroundColor;
+                                    var indicator = '<span class="badge badge-dot"><i class="bg-primary"></i></span>';
+                                    var align = (bodyLines.length > 1) ? 'justify-content-left' : 'justify-content-center';
+                                    html += '<div class="popover-body d-flex align-items-center ' + align + '">' + indicator + body + '</div>';
+                                });
+
+                                $tooltip.html(html);
+                            }
+
+                            // Get tooltip position
+                            var $canvas = $(this._chart.canvas);
+
+                            var canvasWidth = $canvas.outerWidth();
+                            var canvasHeight = $canvas.outerHeight();
+
+                            var canvasTop = $canvas.offset().top;
+                            var canvasLeft = $canvas.offset().left;
+
+                            var tooltipWidth = $tooltip.outerWidth();
+                            var tooltipHeight = $tooltip.outerHeight();
+
+                            var top = canvasTop + model.caretY - tooltipHeight - 16;
+                            var left = canvasLeft + model.caretX - tooltipWidth / 2;
+
+                            // Display tooltip
+                            $tooltip.css({
+                                'top': top + 'px',
+                                'left': left + 'px',
+                                'display': 'block',
+                                'z-index': '100'
+                            });
+
+                        },
+                        callbacks: {
+                            label: function (item, data) {
+                                var label = data.datasets[item.datasetIndex].label || '';
+                                var yLabel = item.yLabel;
+                                var content = '';
+
+                                if (data.datasets.length > 1) {
+                                    content += '<span class="badge badge-primary mr-auto">' + label + '</span>';
+                                }
+
+                                content += '<span class="popover-body-value">' + yLabel + '</span>';
+                                return content;
+                            }
+                        }
+                    }
+                },
+                doughnut: {
+                    cutoutPercentage: 83,
+                    tooltips: {
+                        callbacks: {
+                            title: function (item, data) {
+                                var title = data.labels[item[0].index];
+                                return title;
+                            },
+                            label: function (item, data) {
+                                var value = data.datasets[0].data[item.index];
+                                var content = '';
+
+                                content += '<span class="popover-body-value">' + value + '</span>';
+                                return content;
+                            }
+                        }
+                    },
+                    legendCallback: function (chart) {
+                        var data = chart.data;
+                        var content = '';
+
+                        data.labels.forEach(function (label, index) {
+                            var bgColor = data.datasets[0].backgroundColor[index];
+
+                            content += '<span class="chart-legend-item">';
+                            content += '<i class="chart-legend-indicator" style="background-color: ' + bgColor + '"></i>';
+                            content += label;
+                            content += '</span>';
+                        });
+
+                        return content;
+                    }
+                }
+            }
+        }
+
+        // yAxes
+        Chart.scaleService.updateScaleDefaults('linear', {
+            gridLines: {
+                borderDash: [2],
+                borderDashOffset: [2],
+                color: (mode == 'dark') ? colors.gray[900] : colors.gray[300],
+                drawBorder: false,
+                drawTicks: false,
+                lineWidth: 0,
+                zeroLineWidth: 0,
+                zeroLineColor: (mode == 'dark') ? colors.gray[900] : colors.gray[300],
+                zeroLineBorderDash: [2],
+                zeroLineBorderDashOffset: [2]
+            },
+            ticks: {
+                beginAtZero: true,
+                padding: 10,
+                callback: function (value) {
+                    if (!(value % 10)) {
+                        return value
+                    }
+                }
+            }
+        });
+
+        // xAxes
+        Chart.scaleService.updateScaleDefaults('category', {
+            gridLines: {
+                drawBorder: false,
+                drawOnChartArea: false,
+                drawTicks: false
+            },
+            ticks: {
+                padding: 20
+            },
+            maxBarThickness: 10
+        });
+
+        return options;
+
+    }
+
+    // Parse global options
+    function parseOptions(parent, options) {
+        for (var item in options) {
+            if (typeof options[item] !== 'object') {
+                parent[item] = options[item];
+            } else {
+                parseOptions(parent[item], options[item]);
+            }
+        }
+    }
+
+    // Push options
+    function pushOptions(parent, options) {
+        for (var item in options) {
+            if (Array.isArray(options[item])) {
+                options[item].forEach(function (data) {
+                    parent[item].push(data);
+                });
+            } else {
+                pushOptions(parent[item], options[item]);
+            }
+        }
+    }
+
+    // Pop options
+    function popOptions(parent, options) {
+        for (var item in options) {
+            if (Array.isArray(options[item])) {
+                options[item].forEach(function (data) {
+                    parent[item].pop();
+                });
+            } else {
+                popOptions(parent[item], options[item]);
+            }
+        }
+    }
+
+    // Toggle options
+    function toggleOptions(elem) {
+        var options = elem.data('add');
+        var $target = $(elem.data('target'));
+        var $chart = $target.data('chart');
+
+        if (elem.is(':checked')) {
+
+            // Add options
+            pushOptions($chart, options);
+
+            // Update chart
+            $chart.update();
+        } else {
+
+            // Remove options
+            popOptions($chart, options);
+
+            // Update chart
+            $chart.update();
+        }
+    }
+
+    // Update options
+    function updateOptions(elem) {
+        var options = elem.data('update');
+        var $target = $(elem.data('target'));
+        var $chart = $target.data('chart');
+
+        // Parse options
+        parseOptions($chart, options);
+
+        // Toggle ticks
+        toggleTicks(elem, $chart);
+
+        // Update chart
+        $chart.update();
+    }
+
+    // Toggle ticks
+    function toggleTicks(elem, $chart) {
+
+        if (elem.data('prefix') !== undefined || elem.data('prefix') !== undefined) {
+            var prefix = elem.data('prefix') ? elem.data('prefix') : '';
+            var suffix = elem.data('suffix') ? elem.data('suffix') : '';
+
+            // Update ticks
+            $chart.options.scales.yAxes[0].ticks.callback = function (value) {
+                if (!(value % 10)) {
+                    return prefix + value + suffix;
+                }
+            }
+
+            // Update tooltips
+            $chart.options.tooltips.callbacks.label = function (item, data) {
+                var label = data.datasets[item.datasetIndex].label || '';
+                var yLabel = item.yLabel;
+                var content = '';
+
+                if (data.datasets.length > 1) {
+                    content += '<span class="popover-body-label mr-auto">' + label + '</span>';
+                }
+
+                content += '<span class="popover-body-value">' + prefix + yLabel + suffix + '</span>';
+                return content;
+            }
+
+        }
+    }
+
+
+    // Events
+
+    // Parse global options
+    if (window.Chart) {
+        parseOptions(Chart, chartOptions());
+    }
+
+    // Toggle options
+    $toggle.on({
+        'change': function () {
+            var $this = $(this);
+
+            if ($this.is('[data-add]')) {
+                toggleOptions($this);
+            }
+        },
+        'click': function () {
+            var $this = $(this);
+
+            if ($this.is('[data-update]')) {
+                updateOptions($this);
+            }
+        }
+    });
+
+
+    // Return
+
+    return {
+        colors: colors,
+        fonts: fonts,
+        mode: mode
+    };
+
+})();
+
+//
+// Orders chart
+//
+
+$(document).ready(function () {
+
+    globalStats();
+    slideAllCountries();
+    chartData();
+    topTheWorstCountries();
+    mostSuccessfulCountry();
+
+
+
+    var liveChart = function (chartArray) {
+
+    // Variables
+    var $chart = $('#live-chart');
+
+
+    // Methods
+
+    function init($chart) {
+
+
+        var salesChart = new Chart($chart, {
+            type: 'bar',
+            options: {
+                scales: {
+                    yAxes: [{
+                        gridLines: {
+                            color: Charts.colors.gray[900],
+                            zeroLineColor: Charts.colors.gray[900]
+                        },
+                        ticks: {
+                            callback: function (value) {
+                                if (!(value % 10)) {
+                                    return numeral(value).format('0,0');
+                                }
+                            }
+                        },
+                    }]
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function (item, data) {
+                            var label = data.datasets[item.datasetIndex].label || '';
+                            var yLabel = numeral(item.yLabel).format('0,0');
+                            var content = '';
+
+                            if (data.datasets.length > 1) {
+                                content += '<span class="popover-body-label mr-auto">' + label + ': ' + yLabel + ' </span>';
+                            }
+
+                            // content += ' <span class="popover-body-value">' + yLabel + '</span>';
+                            return content;
+                        }
+                    },
+
+                },
+                title: {
+                    display: true,
+                    text: 'Confirmed & Deaths cases'
+                },
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                },
+            },
+            data: {
+                labels: chartArray.countries,
+                datasets: [{
+                    label: 'Confirmed',
+                    data: chartArray.confirmed,
+                    backgroundColor: '#fb6340'
+                },
+                    {
+                        label: 'Deaths',
+                        data: chartArray.deaths,
+                        backgroundColor: '#f5365c'
+                    }]
+            }
+        });
+
+        // Save to jQuery object
+
+        $chart.data('chart', salesChart);
+
+    }
+
+
+    // Events
+
+    if ($chart.length) {
+
+        init($chart);
+    }
+
+};
+
+
+function chartData() {
+
+    $.ajax('https://api.coronatracker.com/v3/analytics/dailyNewStats?limit=10')
+        .done(function (data) {
+
+            if (data) {
+
+                if (typeof data == 'string') {
+
+                    data = JSON.parse(data);
+                }
+                theWorstCountry(data[0]);
+
+                var countries = [];
+                var confirmed = [];
+                var deaths = [];
+
+                for(var i = 0; i<data.length; i++){
+
+                    countries.unshift(data[i].country);
+                    confirmed.unshift(data[i].daily_cases);
+                    deaths.unshift(data[i].daily_deaths);
+                }
+                $('#liveChartLoader').hide();
+                liveChart({countries, confirmed, deaths});
+
+            }
+        });
+}
+
+
+
+
+var countries = false;
+
+function slideAllCountries() {
+
+    $.get('https://api.coronatracker.com/v3/stats/worldometer/country')
+        .done(function (data) {
+
+            if (data) {
+
+                if (typeof data == 'string') {
+
+                    data = JSON.parse(data);
+                }
+
+                var temp = ``;
+                for (var i = 0; i < data.length; i++) {
+
+                    temp += `
+                       <tr>
+                            <th scope="row">
+                                <img src="https://www.countryflags.io/${data[i].countryCode}/shiny/32.png" alt=""> ${data[i].country.length > 15 ? data[i].country.substring(0, 15) + '...' : data[i].country}
+                            </th>
+                            <td>
+                               ${numeral(data[i].totalConfirmed).format('0,0')}
+                            </td>
+                            <td>
+                                 ${numeral(data[i].totalDeaths).format('0,0')}
+                            </td>
+                            <td>
+                                 ${numeral(data[i].totalRecovered).format('0,0')}
+                            </td>
+                        </tr>
+                `
+                }
+
+                var holderHeight = $('.tableFixHead').height();
+                $('#countryHolder').css('margin-top', holderHeight);
+                $('#listOfCoutrniesLoader').hide();
+                $('#listOfCoutrnies').html(temp);
+
+                countries = true;
+            }
+        });
+}
+
+
+
+
+setInterval(function () {
+
+    if (countries == true) {
+
+        var margin = $('#countryHolder').css('margin-top');
+        var holderHeight = $('.tableFixHead').height();
+        var height = $('#countryHolder').height();
+
+        if (parseInt(margin) <= -height) {
+            countries = false;
+            slideAllCountries();
+            margin = holderHeight;
+
+        }
+
+        var slide = parseInt(margin) - 1;
+
+        $('#countryHolder').css('margin-top', slide + 'px');
+    }
+
+}, 20);
+
+
+function theWorstCountry(country) {
+
+    $.get(`https://api.coronatracker.com/v3/stats/worldometer/country?countryCode=${country.country_code}`)
+        .done(function (data) {
+
+            if(data){
+
+                if(typeof data == 'string'){
+
+                    data = JSON.parse(data);
+                }
+
+                theWorstCountryTemplate(data[0]);
+
+            }
+        });
+
+}
+
+
+function theWorstCountryTemplate(data) {
+
+    var temp = ``;
+
+    temp = `<tr>
+                                <th scope="row">
+                                    <div class="media align-items-center">
+
+                                        <img src="https://www.countryflags.io/${data.countryCode}/shiny/48.png">
+                                        <span class="name mb-0 text-sm ml-1"> ${data.country}</span>
+
+                                    </div>
+                                </th>
+                                <td class="budget">
+                                   ${numeral(data.dailyConfirmed).format('0,0')}
+                                </td>
+                                <td>
+
+                                ${numeral(data.dailyDeaths).format(0,0)}
+                                </td>
+                                <td>
+                                  ${numeral(data.totalConfirmed).format(0,0)}
+
+                                </td>
+                                <td>
+
+                                    ${numeral(data.totalDeaths).format('0,0')}
+                                </td>
+                                <td>
+
+                                ${numeral(data.totalRecovered).format('0,0')}
+                                </td>
+
+                            </tr>`;
+
+    $('#theWorstCountryLoader').hide();
+    $('#theWorstCountry').html(temp);
+}
+
+
+function globalStats() {
+
+    $.get('https://api.coronatracker.com/v3/stats/worldometer/global')
+        .done(function (data) {
+
+            if(data){
+
+                if(typeof data == 'string'){
+
+                    data = JSON.parse(data);
+                }
+
+                $('#liveTotalConfirmed').text(numeral(data.totalConfirmed).format('0,0'));
+                $('#liveTotalDeaths').text(numeral(data.totalDeaths).format('0,0'));
+                $('#liveTotalRecovered').text(numeral(data.totalRecovered).format('0,0'));
+                $('#liveTotalActive').text(numeral(data.totalActiveCases).format('0,0'));
+
+                $('#liveUpdated').text(moment(data.created).fromNow());
+            }
+        });
+}
+
+
+
+
+function mostSuccessfulCountry() {
+
+    $.get('https://api.coronatracker.com/v3/stats/worldometer/country')
+        .done(function (data) {
+
+            if(data){
+
+                if(typeof data == 'string'){
+
+                    data = JSON.parse(data);
+                }
+                var country = _.last(data);
+
+                $('#successfulCountryName').html(`<img src="https://www.countryflags.io/${country.countryCode}/shiny/48.png" /> ${country.country}`);
+                $('#successfulCountryConfirmed').text(country.totalConfirmed);
+            }
+        });
+}
+
+
+function topTheWorstCountries() {
+
+    $.get('https://api.coronatracker.com/v3/stats/worldometer/global')
+        .done(function (global) {
+
+            if(global){
+
+                if(typeof global == 'string'){
+
+                    global = JSON.parse(global);
+                }
+
+                $.get('https://api.coronatracker.com/v3/stats/worldometer/country?limit=7')
+                    .done(function (data) {
+
+                        if(typeof data == 'string'){
+
+                            data = JSON.parse(data);
+                        }
+                        topTheWorstCountriesTemplate(data, global);
+                    });
+
+            }
+        });
+}
+
+
+
+function topTheWorstCountriesTemplate(data, global) {
+
+    var temp = ``;
+
+    for(var i = 0; i<data.length; i++){
+
+        var totalConfirmed = parseInt(data[i].totalConfirmed) / parseInt(global.totalConfirmed) * 100;
+        var totalDeaths = parseInt(data[i].totalDeaths) / parseInt(global.totalDeaths) * 100;;
+
+        temp+=`<tr>
+                <th scope="row">
+                    <div class="media align-items-center">
+
+                        <img src="https://www.countryflags.io/${data[i].countryCode}/shiny/48.png">
+                        <span class="name mb-0 text-sm ml-1"> ${data[i].country}</span>
+
+                    </div>
+                </th>
+                <td class="budget">
+                    ${numeral(data[i].dailyConfirmed).format('0,0')}
+                </td>
+                <td>
+                    ${numeral(data[i].dailyDeaths).format('0,0')}
+                </td>
+
+                <td>
+                    <div class="d-flex align-items-center">
+                        <span class="completion mr-2">${totalConfirmed.toFixed(2)}%</span>
+                        <div>
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" role="progressbar"
+                                     aria-valuenow="${totalConfirmed}" aria-valuemin="0" aria-valuemax="100"
+                                     style="width: ${totalConfirmed}%;"></div>
+                            </div>
+                        </div>
+                        <span class="ml-2"> <i class="fas fa-globe-americas fa-lg"></i></span>
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <span class="completion mr-2">${totalDeaths.toFixed(2)}%</span>
+                        <div>
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" role="progressbar"
+                                     aria-valuenow="${totalDeaths}" aria-valuemin="0" aria-valuemax="100"
+                                     style="width: ${totalDeaths}%;"></div>
+                            </div>
+
+                        </div>
+                        <span class="ml-2"> <i class="fas fa-globe-americas fa-lg"></i></span>
+                    </div>
+                </td>
+
+        </tr>`
+    }
+    $('#theWorstCountriesLoader').hide();
+    $('#theWorstCountries').html(temp);
+
+}
+
+var changePanel = 1;
+
+setInterval(function () {
+
+    if(changePanel == 1){
+
+        $('#panel1').fadeOut(500, function(){
+
+            $('#panel2').fadeIn(500);
+            changePanel = 2;
+        });
+    }
+    else if(changePanel == 2){
+
+        $('#panel2').fadeOut(500, function(){
+
+            $('#panel1').fadeIn(500);
+            changePanel = 1;
+        });
+    }
+
+}, 1000 * 30);
+
+
+
+setInterval(function () {
+
+    globalStats();
+    chartData();
+    topTheWorstCountries();
+    mostSuccessfulCountry();
+
+}, 1000 * 60);
+
+
+
+
+});
+
+
