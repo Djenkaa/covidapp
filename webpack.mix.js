@@ -34,7 +34,6 @@ mix.scripts([
     'resources/js/myJS/Chart.extension.js',
     'resources/js/myJS/argon.js',
     'resources/js/myJS/countryChart.js',
-    'resources/js/myJS/liveArgon.js'
 
 ],'public/js/all.js');
 
