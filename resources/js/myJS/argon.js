@@ -1119,6 +1119,11 @@ function mostCriticalCountry(countryCode){
         .done(function (data) {
             if(data){
 
+                if(typeof data == 'string'){
+
+                    data = JSON.parse(data);
+                }
+
                 $('#criticalCountryName').text(countryList[data[0].countryCode]);
                 $('#criticalCountryConfirmed').text(numeral(data[0].dailyConfirmed).format('0,0'));
                 $('#criticalCountryDeaths').text(numeral(data[0].dailyDeaths).format('0,0'));
