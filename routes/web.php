@@ -46,4 +46,4 @@ Route::post('/country/date', 'HomeController@byDate')->name('country.byDate');
 
 // LIVE INTERFACE
 
-Route::get('/live','LiveController@dashboard')->name('live.dashboard')->middleware('livePermission');
+Route::get('/live','LiveController@dashboard')->name('live.dashboard');
