@@ -18340,13 +18340,13 @@ function slideAllCountries() {
                                 <img src="https://www.countryflags.io/${data[i].countryCode}/shiny/32.png" alt=""> ${data[i].country.length > 15 ? data[i].country.substring(0, 15) + '...' : data[i].country}
                             </th>
                             <td>
-                               ${data[i].totalConfirmed}
+                               ${numeral(data[i].totalConfirmed).format('0,0')}
                             </td>
                             <td>
-                                 ${data[i].totalDeaths}
+                                 ${numeral(data[i].totalDeaths).format('0,0')}
                             </td>
                             <td>
-                                 ${data[i].totalRecovered}
+                                 ${numeral(data[i].totalRecovered).format('0,0')}
                             </td>
                         </tr>
                 `
@@ -18464,9 +18464,13 @@ function globalStats() {
                 $('#liveTotalDeaths').text(numeral(data.totalDeaths).format('0,0'));
                 $('#liveTotalRecovered').text(numeral(data.totalRecovered).format('0,0'));
                 $('#liveTotalActive').text(numeral(data.totalActiveCases).format('0,0'));
+
+                $('#liveUpdated').text(moment(data.created).fromNow());
             }
         });
 }
+
+
 
 
 function mostSuccessfulCountry() {
@@ -18504,12 +18508,15 @@ function topTheWorstCountries() {
                 $.get('https://api.coronatracker.com/v3/stats/worldometer/country?limit=7')
                     .done(function (data) {
 
+                        if(typeof data == 'string'){
+
+                            data = JSON.parse(data);
+                        }
                         topTheWorstCountriesTemplate(data, global);
                     });
+
             }
         });
-
-
 }
 
 
@@ -18545,8 +18552,8 @@ function topTheWorstCountriesTemplate(data, global) {
                         <div>
                             <div class="progress">
                                 <div class="progress-bar bg-warning" role="progressbar"
-                                     aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                                     style="width: 60%;"></div>
+                                     aria-valuenow="${totalConfirmed}" aria-valuemin="0" aria-valuemax="100"
+                                     style="width: ${totalConfirmed}%;"></div>
                             </div>
                         </div>
                         <span class="ml-2"> <i class="fas fa-globe-americas fa-lg"></i></span>
@@ -18558,8 +18565,8 @@ function topTheWorstCountriesTemplate(data, global) {
                         <div>
                             <div class="progress">
                                 <div class="progress-bar bg-warning" role="progressbar"
-                                     aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                                     style="width: 60%;"></div>
+                                     aria-valuenow="${totalDeaths}" aria-valuemin="0" aria-valuemax="100"
+                                     style="width: ${totalDeaths}%;"></div>
                             </div>
 
                         </div>
@@ -18596,6 +18603,17 @@ setInterval(function () {
     }
 
 }, 1000 * 30);
+
+
+
+setInterval(function () {
+
+    globalStats();
+    chartData();
+    topTheWorstCountries();
+    mostSuccessfulCountry();
+
+}, 1000 * 60);
 
 
 

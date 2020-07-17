@@ -129,7 +129,7 @@
                     <div class="row align-items-center">
                         <div class="col">
                             {{--                        <h6 class="text-uppercase text-light ls-1 mb-1">Overview</h6>--}}
-                            <h2 class="text-white mb-0">The most critical country</h2>
+                            <h2 class="text-white mb-0">The most critical country today</h2>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-exclamation-triangle fa-2x"></i>
@@ -145,16 +145,16 @@
                             <table class="table align-items-center table-dark">
                                 <thead class="thead-dark">
                                 <tr>
-                                    <th scope="col" class="sort text-light font-weight-bold" data-sort="name">Country
+                                    <th scope="col" class="sort text-light" data-sort="name">Country
                                     </th>
-                                    <th scope="col" class="sort text-light font-weight-bold" data-sort="budget">
+                                    <th scope="col" class="sort text-light" data-sort="budget">
                                         Confirmed today
                                     </th>
-                                    <th scope="col" class="sort text-light font-weight-bold" data-sort="status">Deaths
+                                    <th scope="col" class="sort text-light" data-sort="status">Deaths
                                         today
                                     </th>
-                                    <th scope="col" class="sort text-light font-weight-bold">Total Confirmed</th>
-                                    <th scope="col" class="sort text-light font-weight-bold" data-sort="completion">
+                                    <th scope="col" class="sort text-light">Total Confirmed</th>
+                                    <th scope="col" class="sort text-light" data-sort="completion">
                                         Total Deaths
                                     </th>
                                     <th scope="col" class="sort text-light font-weight-bold" data-sort="completion">
@@ -185,7 +185,7 @@
                     <div class="row align-items-center">
                         <div class="col">
                             <h6 class="text-uppercase text-light ls-1 mb-1">Overview</h6>
-                            <h2 class="text-white mb-0">Top 7 the most vulnerable countries today</h2>
+                            <h2 class="text-white mb-0">Top 7 the most vulnerable countries</h2>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-chart-bar fa-2x"></i>
@@ -201,19 +201,19 @@
                                 <table class="table align-items-center table-dark">
                                     <thead class="thead-dark">
                                     <tr>
-                                        <th scope="col" class="sort text-light font-weight-bold" data-sort="name">
+                                        <th scope="col" class="sort text-light" data-sort="name">
                                             Country
                                         </th>
-                                        <th scope="col" class="sort text-light font-weight-bold" data-sort="budget">
+                                        <th scope="col" class="sort text-light" data-sort="budget">
                                             Confirmed today
                                         </th>
-                                        <th scope="col" class="sort text-light font-weight-bold" data-sort="status">
+                                        <th scope="col" class="sort text-light" data-sort="status">
                                             Deaths today
                                         </th>
-                                        <th scope="col" class="sort text-light font-weight-bold" data-sort="completion">
+                                        <th scope="col" class="sort text-light" data-sort="completion">
                                             Total Confirmed
                                         </th>
-                                        <th scope="col" class="sort text-light font-weight-bold" data-sort="completion">
+                                        <th scope="col" class="sort text-light" data-sort="completion">
                                             Total Deaths
                                         </th>
 
@@ -301,30 +301,24 @@
 
                 </div>
             </div>
+            <div class="card card-stats mb-4 mb-xl-0 shadow-sm mt-4">
+                <div class="card-body">
+
+                    <div class="row">
+                    <div class="col">
+                        <h5 class="text-uppercase"><i class="fas fa-clock fa-lg"></i> Last Update</h5>
+                    </div>
+                    <div class="col-auto">
+                        <span id="liveUpdated">...</span>
+                    </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
 
     {{--  ENDCHARTS  --}}
-
-
-    {{--  TABLES  --}}
-
-    <div class="row">
-
-        <div class="col-xl-8 mb-5 mb-xl-0 mt--4 ">
-
-
-        </div>
-
-
-        <div class="col-xl-4 mt-4">
-
-
-        </div>
-    </div>
-
-    {{--  ENDTABLES  --}}
 
 
 @endsection
