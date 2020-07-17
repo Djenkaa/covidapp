@@ -228,5 +228,10 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
+    'allowIps'=>[
+        '127.0.0.1',
+        '87.116.180.59',
+        '46.235.96.58',
+    ],
 
 ];
