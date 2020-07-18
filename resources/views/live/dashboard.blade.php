@@ -249,21 +249,39 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col">{{__('appTerms.country')}}</th>
+                                <th></th>
+                                <th></th>
+                                <th scope="col">{{__('appTerms.confirmed')}}</th>
+                                <th scope="col">{{__('appTerms.deaths')}}</th>
+                                <th scope="col">{{__('appTerms.recovered')}}</th>
+                            </tr>
+                            </thead>
+                        </table>
+
+                    </div>
+                </div>
+                <div class="card-body p-0">
 
                     <div class="tableFixHead">
                         <!-- Projects table -->
                         <div id="countryHolder">
 
                             <table class="table align-items-center table-flush">
-                                <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">{{__('appTerms.country')}}</th>
-                                    <th scope="col">{{__('appTerms.confirmed')}}</th>
-                                    <th scope="col">{{__('appTerms.deaths')}}</th>
-                                    <th scope="col">{{__('appTerms.recovered')}}</th>
-                                </tr>
-                                </thead>
+{{--                                <thead style="display: none;">--}}
+{{--                                <tr>--}}
+{{--                                    <th></th>--}}
+{{--                                    <th></th>--}}
+{{--                                    <th></th>--}}
+{{--                                    <th></th>--}}
+{{--                                </tr>--}}
+{{--                                </thead>--}}
                                 <tbody id="listOfCoutrnies">
 
                                 <div id="listOfCoutrniesLoader" class="loader" style="color: #5e72e4"></div>
