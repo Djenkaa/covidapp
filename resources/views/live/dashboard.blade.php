@@ -274,14 +274,7 @@
                         <div id="countryHolder">
 
                             <table class="table align-items-center table-flush">
-{{--                                <thead style="display: none;">--}}
-{{--                                <tr>--}}
-{{--                                    <th></th>--}}
-{{--                                    <th></th>--}}
-{{--                                    <th></th>--}}
-{{--                                    <th></th>--}}
-{{--                                </tr>--}}
-{{--                                </thead>--}}
+
                                 <tbody id="listOfCoutrnies">
 
                                 <div id="listOfCoutrniesLoader" class="loader" style="color: #5e72e4"></div>
