@@ -437,6 +437,13 @@ setInterval(function () {
 
 
 
+setInterval(function () {
+
+    $('#currentTime').text(moment().format('HH:mm:ss'));
+    $('#currentDate').text(moment().format('DD.MMM.YYYY'));
+
+}, 1000);
+
 
 });
 

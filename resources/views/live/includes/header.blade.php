@@ -27,13 +27,13 @@
                 <li class="nav-item">
                     <a class="nav-link nav-link-icon" href="#">
                         <i class="fas fa-clock"></i>
-                        <span class="nav-link-inner--text"> {{\Carbon\Carbon::now()->format('H:i')}}</span>
+                        <span class="nav-link-inner--text" id="currentTime"> ...</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link nav-link-icon" href="#">
                         <i class="fas fa-calendar-alt"></i>
-                        <span class="nav-link-inner--text"> {{\Carbon\Carbon::now()->toFormattedDateString()}}</span>
+                        <span class="nav-link-inner--text" id="currentDate"> ...</span>
                     </a>
                 </li>
 
