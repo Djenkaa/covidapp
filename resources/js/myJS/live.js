@@ -159,7 +159,7 @@ function slideAllCountries() {
                             <th scope="row">
                                 <img src="https://www.countryflags.io/${data[i].countryCode}/shiny/32.png" alt=""> <span style="font-size: 15px;">${data[i].country.length > 15 ? data[i].country.substring(0, 15) + '...' : data[i].country}</span>
                             </th>
-                            <td>
+                            <td class="p-0" style="padding-right:25px !important;">
                                ${numeral(data[i].totalConfirmed).format('0,0')}
                             </td>
                             <td>
@@ -422,7 +422,7 @@ setInterval(function () {
         });
     }
 
-}, 1000 * 30);
+}, 1000 * 15);
 
 
 
